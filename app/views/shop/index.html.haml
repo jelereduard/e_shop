@@ -1,3 +1,35 @@
-%html
-  %h1 Shop#index
-  %p Find me in app/views/shop/index.html.erb
+.center.jumbotron
+  %h1 Shop home
+  - if not user_signed_in?
+    %p Sign in or create an account. 
+    = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
+  - else
+    .wrapper
+      .row
+        .col-1
+          %p Col-1
+        .col-1
+          %p Col-1
+        .col-1
+          %p Col-1
+      .row
+        .col-2
+          %p Col-2
+        .col-2
+          %p Col-2
+        .col-2
+          %p Col-2
+      .row
+        .col-3
+          %p Col-3
+        .col-3
+          %p Col-3
+        .col-3
+          %p Col-3
+      .row
+        .col-4
+          %p Col-4
+        .col-4
+          %p Col-4
+        .col-4
+          %p Col-4

@@ -1,0 +1,166 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
+
+  /* grid */
+  
+$color_bon_jour_approx: #e1e1e1;
+$seashell: #f1f1f1;
+$color_mine_shaft_approx: #333;
+$white: #fff;
+$black_10: rgba(0, 0, 0, 0.1);
+$color_suva_gray_approx: #888;
+$color_mountain_mist_approx: #999;
+$color_tapa_approx: #777;
+$color_mustard_approx: #ffdb4d;
+$color_cornflower_blue_approx: #5cadff;
+$color_carnation_approx: #ff5353;
+$color_shamrock_approx: #33d685;
+
+  .wrapper {
+    margin: 20px auto;
+  }
+
+  [class*="col-"] {
+    margin-bottom: 20px;
+    min-height: 30px;
+    background: $white;
+    box-shadow: 0 3px 2px $black_10;
+    text-align: center;
+    padding: 20px;
+  }
+
+  @media all and(min-width: 500px) {
+    .wrapper {
+      padding: 0 20px;
+      background-color: $color_bon_jour_approx;
+      padding-top: 20px;
+      border-radius: 5px;
+    }
+    .row {
+      display: flex;
+    }
+    [class*="col-"] {
+      margin-right: 20px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .col-1 {
+      flex: 1;
+    }
+    .col-2 {
+      flex: 2;
+    }
+    .col-3 {
+      flex: 3;
+    }
+    .col-4 {
+      flex: 4;
+    }
+    .full-width {
+      margin-bottom: 20px;
+      margin-right: 0;
+    }
+    .space-off {
+      margin-bottom: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
