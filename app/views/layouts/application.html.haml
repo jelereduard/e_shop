@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title EShop5
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body{:class => "#{yield(:body_class)}"}
+    - if flash[:notice]
+      .notification.is-success.global-notification
+        %p.notice
+          - notice
+    - if flash[:alert]
+      .notification.is-danger.global-notification
+        %p.alert
+          - alert
+    %nav.navbar.is-warning{"alert-label" => "main navigation", :role => "navigation"}
+      .navbar-brand
+        = link_to root_path, class:"navbar-item" do
+          %h1.title.is-5 E-shop
+        
+      #navbar.navbar-menu
+        .navbar-end
+          .navbar-item
+            .field.is-grouped
+              - if user_signed_in?
+                = link_to 'Cart', '#', class: "navbar-item button is-dark"
+                .navbar-item.has-dropdown.is-hoverable
+                  = link_to 'Account', edit_user_registration_path, class: "navbar-link"
+                  .navbar-dropdown.is-right
+                    = link_to current_user.email, edit_user_registration_path, class: "navbar-item"
+                    = link_to "Log Out", destroy_user_session_path, method: :delete, class: "navbar-item"
+              - else
+                = link_to "Sign In", new_user_session_path, class: "navbar-item button is-warning"
+                = link_to "Sign Up", new_user_registration_path, class: "navbar-item button is-warning"
+    = yield(:header)
+    .container
+      = yield

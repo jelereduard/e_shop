@@ -253,6 +253,9 @@ GEM
     guard-minitest (2.4.6)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    haml (5.1.2)
+      temple (>= 0.8.0)
+      tilt
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -387,6 +390,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -429,6 +433,7 @@ DEPENDENCIES
   fog (= 1.42)
   guard (= 2.14.1)
   guard-minitest (= 2.4.6)
+  haml
   jbuilder (= 2.7.0)
   jquery-rails (= 4.3.1)
   listen (= 3.1.5)
