@@ -5,3 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+# User
+
+User.create!(
+    email: "jelereduard@yahoo.com", 
+    password: "foobar", 
+    password_confirmation: "foobar", 
+    first_name: "Jeler", 
+    last_name: "Eduard")
+
+
+# Products
+
+20.times do |n|
+    name=Faker::Food.dish
+    description=Faker::Food.description
+    price=rand(10.0...99.99).round(2)
+    Product.create!(
+        name: name,
+        price: price,
+        description: description
+    )
+end
