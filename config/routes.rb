@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'products/new'
   devise_for :users, controllers: {
     registrations: 'registrations'
   }

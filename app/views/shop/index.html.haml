@@ -6,57 +6,16 @@
   - else
     %h1 Shop
 
+- @items = Product.all
 .container-fluid
-  .row
-    = render 'product_preview'
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-  .row
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-      .card
-        %img.card-img-top{:alt => "Card image cap", :src => "..."}
-        .card-body
-          %h5.card-title Card title
-          %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          %a.btn.btn-primary{:href => "#"} Go somewhere
-  
+  - @items.in_groups_of(4, false).each_with_index do |group, index|
+    .row-fluid
+      - group.each do |item|
+        .col-lg-3.col-md-4.col-sm-6.col-xs-12
+          .card
+            %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
+            .card-body
+              %h5.card-title #{item.name}: #{item.price}
+              %p.card-text #{item.description}
+              %a.btn.btn-primary{:href => "#"} 
+                %h5 Add to Cart!

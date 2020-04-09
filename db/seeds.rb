@@ -10,7 +10,7 @@
 # User
 
 User.create!(
-    email: "jelereduard@yahoo.com", 
+    email: "jelereduard1@yahoo.com", 
     password: "foobar", 
     password_confirmation: "foobar", 
     first_name: "Jeler", 
@@ -26,6 +26,7 @@ User.create!(
     Product.create!(
         name: name,
         price: price,
-        description: description
+        description: description,
+        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
     )
 end

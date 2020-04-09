@@ -15,11 +15,16 @@
     color: #fff;
     background-color: #007b5e;
     border-color: #007b5e;
+    h5{
+        color: white;
+
+    }
 }
 
 
 .card {
     min-height: 312px;
+    max-height: 313px;
 }
 
 .card a {
@@ -40,5 +45,5 @@
 .card {
     position: relative;
     z-index: 2;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
