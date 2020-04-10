@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations'
   }
-  #get 'shop/index'
-  root 'shop#index'
+  # get 'shop/index'
+  root 'products#index'
 
-  get  '/home',    to: 'shop#index'
+  # get  '/home',    to: 'products#index'
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
