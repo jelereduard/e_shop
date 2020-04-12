@@ -1,0 +1,60 @@
+
+$color_bon_jour_approx: #e1e1e1;
+$seashell: #f1f1f1;
+$color_mine_shaft_approx: #333;
+$white: #fff;
+$black_10: rgba(0, 0, 0, 0.1);
+$color_suva_gray_approx: #888;
+$color_mountain_mist_approx: #999;
+$color_tapa_approx: #777;
+$color_mustard_approx: #ffdb4d;
+$color_cornflower_blue_approx: #5cadff;
+$color_carnation_approx: #ff5353;
+$color_shamrock_approx: #33d685;
+
+  .wrapper {
+    margin: 20px auto;
+  }
+
+  [class*="col-"] {
+    margin-bottom: 20px;
+    min-height: 30px;
+    
+    box-shadow: 0 3px 2px $black_10;
+    text-align: center;
+    padding: 20px;
+  }
+
+  @media all and(min-width: 500px) {
+    .wrapper {
+      padding: 0 0px;
+      background-color: $color_bon_jour_approx;
+      padding-top: 20px;
+      border-radius: 5px;
+    }
+    
+    [class*="col-"] {
+      margin-right: 0px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .full-width {
+      margin-bottom: 20px;
+      margin-right: 0;
+    }
+    .space-off {
+      margin-bottom: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+
+  /*
+    .row {
+      display: flex;
+    }
+    */

@@ -1,6 +1,13 @@
+
 .card {
     border: none;
     background: #ffffff;
+    border-radius: 20px;
+    .card-body{
+        .card-text{
+            font-size: 0.8em;
+        }
+    }
 }
 
 .btn-primary:hover,
@@ -17,10 +24,14 @@
     border-color: #007b5e;
     h5{
         color: white;
-
     }
-}
 
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+}
 
 .card {
     min-height: 312px;
@@ -40,6 +51,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
+
 }
 
 .card {
