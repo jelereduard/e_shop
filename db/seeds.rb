@@ -10,7 +10,7 @@
 # User
 
 User.create!(
-    email: "jelereduard1@yahoo.com", 
+    email: "jelereduard@yahoo.com", 
     password: "foobar", 
     password_confirmation: "foobar", 
     first_name: "Jeler", 
@@ -30,3 +30,17 @@ User.create!(
         image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
     )
 end
+
+# Categories
+
+Category.create!(
+    name: "Burger"
+)
+
+Category.create!(
+    name: "Soup"
+)
+
+Category.create!(
+    name: "Pasta"
+)

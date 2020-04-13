@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   mount_uploader :image, ImageUploader
-  # belongs_to :category, optional: true
+  belongs_to :category, optional: true
 
 
   validates :name, :price, :description, presence: true

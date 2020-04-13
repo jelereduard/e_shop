@@ -3,17 +3,35 @@ class ProductsController < ApplicationController
 # before_action :admin_user, only: [:create, :edit, :destroy]
   
   def new
+    @product = Product.new 
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   def index
     @products = Product.all
   end
 
+  def show
+  end
+
   def edit
   end
 
   def create
-  end
+    @product = Product.new(product_params) 
+    @product.category_id = params[:category_id] 
+      if @product.save 
+        # format.html { redirect_to @product, notice: ‘Product was successfully created.’ } 
+        # format.json { render :show, status: :created, location: @product } 
+        flash[:success] = "Product created!"
+        redirect_to root_url
+      else 
+        # format.html { render :new } 
+        # format.json { render json: @product.errors, status: :unprocessable_entity } 
+        
+        render 'static_pages/about'
+      end 
+    end 
 
   def destroy
     @product.destroy
@@ -28,7 +46,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).premit(:name, :price, :description, :image)
+      params.require(:product).permit(:name, :price, :description, :category_id, :image)
     end
     
 end

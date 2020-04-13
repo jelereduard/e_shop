@@ -1,0 +1,35 @@
+= form_with(model: product, local: true) do |form|
+  - if product.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(product.errors.count, "error")
+        prohibited this product from being saved:
+      %ul
+        - product.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :price
+    = form.text_field :price
+  .field
+    = form.label :category_id
+    = select_tag(:category_id, options_for_select(@categories), :prompt => "Select one!")
+  %span.image
+    = form.label :image
+    = form.file_field :image, accept: 'image/jpeg,image/gif,image/png'
+
+  .field
+    = form.label :description
+    = form.text_area :description
+  .actions
+    = form.submit
+
+:javascript
+  $('#product_image').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });

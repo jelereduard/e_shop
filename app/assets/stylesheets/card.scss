@@ -9,13 +9,27 @@
         }
     }
 }
-
+.card{
+    .btn-primary {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    
+    }    
+}
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: #108d6f;
     border-color: #108d6f;
     box-shadow: none;
     outline: none;
+}
+
+.center.jumbotron{
+    a:visited {
+        color: #fff !important;
+      }
 }
 
 .btn-primary {
@@ -25,12 +39,6 @@
     h5{
         color: white;
     }
-
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-
 }
 
 .card {
