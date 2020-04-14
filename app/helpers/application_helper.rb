@@ -8,4 +8,8 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def set_category(name = "Home")
+    session[:current_category]=name
+  end
 end

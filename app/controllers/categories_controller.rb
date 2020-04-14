@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
   end
-
+ 
   # GET /categories/1
   # GET /categories/1.json
   def show
@@ -65,6 +65,13 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
+      session[:current_category] = "Home"
+      # if @category.nil?
+      #   redirect_to root_path
+      # else
+      #     session[:current_category] = @category
+      #     current_category = @category
+      # end      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

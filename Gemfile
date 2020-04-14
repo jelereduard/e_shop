@@ -24,6 +24,7 @@ gem 'pg',  '0.20.0'
 gem 'simple_form'
 gem 'devise', '~> 4.4'
 gem "haml"
+gem 'cancancan'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri

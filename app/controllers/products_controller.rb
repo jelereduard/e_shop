@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 # before_action :admin_user, only: [:create, :edit, :destroy]
   
   def new
@@ -12,26 +12,43 @@ class ProductsController < ApplicationController
   end
 
   def show
+    
   end
 
   def edit
-  end
+    if !can?(:manage, @product)
+      redirect_to root_url
+    end
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
+  end 
 
   def create
     @product = Product.new(product_params) 
-    @product.category_id = params[:category_id] 
+    @product.category_id = params[:category_id]
+    respond_to do |format|
       if @product.save 
-        # format.html { redirect_to @product, notice: ‘Product was successfully created.’ } 
-        # format.json { render :show, status: :created, location: @product } 
-        flash[:success] = "Product created!"
-        redirect_to root_url
+        format.html { redirect_to @product, notice: 'Product was successfully created.' } 
+        format.json { render :show, status: :created, location: @product } 
       else 
-        # format.html { render :new } 
-        # format.json { render json: @product.errors, status: :unprocessable_entity } 
+        format.html { render :new } 
+        format.json { render json: @product.errors, status: :unprocessable_entity } 
         
-        render 'static_pages/about'
-      end 
+      end
     end 
+  end 
+
+
+  def update
+    respond_to do |format|
+      if @product.update(product_params)
+        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.json { render :show, status: :ok, location: @product }
+      else
+        format.html { render :edit }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def destroy
     @product.destroy

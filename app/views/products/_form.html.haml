@@ -1,12 +1,5 @@
-= form_with(model: product, local: true) do |form|
-  - if product.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(product.errors.count, "error")
-        prohibited this product from being saved:
-      %ul
-        - product.errors.full_messages.each do |message|
-          %li= message
+= simple_form_for(@product) do |form|
+  = form.error_notification
   .field
     = form.label :name
     = form.text_field :name
@@ -19,7 +12,7 @@
   %span.image
     = form.label :image
     = form.file_field :image, accept: 'image/jpeg,image/gif,image/png'
-
+  %br
   .field
     = form.label :description
     = form.text_area :description

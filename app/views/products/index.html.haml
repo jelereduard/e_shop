@@ -1,21 +1,54 @@
+- @categories=Category.all
+- if session[:current_category].nil?
+  = set_category
+
 .center.jumbotron
   - if not user_signed_in?
     %h1 Welcome!!
     %p Sign in or create an account. 
     = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
   - else
-    %h1 Shop
+    %h1 Home
+    
+    %ul.nav.nav-tabs
+      %li.active
+        %a{ "data-toggle" => "tab",  :href => "#home"} Home
+          
+      - @categories.in_groups_of(3, false).each_with_index do |group, index|
+        -group.each do |category|  
+          %li
+            %a{ "data-toggle" => "tab", :href => "#"+"#{category.name}"} #{category.name}
+      
+    .tab-content
+      #home.tab-pane.fade.in.active
+        .container-fluid
+          - @products.in_groups_of(4, false).each_with_index do |group, index|
+            .row-fluid
+              - group.each do |item|
+                .col-lg-3.col-md-4.col-sm-6.col-xs-12
+                  .card
+                    %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
+                    .card-body
+                      %h5.card-title #{item.name}: #{number_to_currency(item.price)}
+                      %p.card-text #{item.description}
+                    %a.btn.btn-primary{:href => "#"} 
+                      %h5 Add to Cart!
 
-.container-fluid
-  - @products.in_groups_of(4, false).each_with_index do |group, index|
-    .row-fluid
-      - group.each do |item|
-        .col-lg-3.col-md-4.col-sm-6.col-xs-12
-          .card
-            %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
-            .card-body
-              %h5.card-title #{item.name}: #{number_to_currency(item.price)}
-              %p.card-text #{item.description}
-            %a.btn.btn-primary{:href => "#"} 
-              %h5 Add to Cart!
-
+      - @categories.in_groups_of(3, false).each_with_index do |group, index|
+        -group.each do |category|  
+          .tab-pane.fade.in{:id => "#{category.name}"}
+            - @cat = Category.find(category.id)
+            - products=Product.all
+            - @products = @cat.products
+            .container-fluid
+              - @products.in_groups_of(4, false).each_with_index do |group, index|
+                .row-fluid
+                  - group.each do |item|
+                    .col-lg-3.col-md-4.col-sm-6.col-xs-12
+                      .card
+                        %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
+                        .card-body
+                          %h5.card-title #{item.name}: #{number_to_currency(item.price)}
+                          %p.card-text #{item.description}
+                        %a.btn.btn-primary{:href => "#"} 
+                          %h5 Add to Cart!
