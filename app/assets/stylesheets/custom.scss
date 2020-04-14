@@ -85,8 +85,10 @@ header.navbar.navbar-inverse.navbar-fixed-top{
 }
 
 #logo {
-  float: left;
-  margin-right: 10px;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px !important;
+  display: block;
   font-size: 1.7em;
   color: $blanched-almond;
   text-transform: uppercase;

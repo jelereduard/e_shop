@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'dashboards/dashboard'
   resources :categories
   get 'products/new'
   devise_for :users, controllers: {
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
+  get  '/dashboard',to:'dashboards#dashboard'
 
   resources :categories
   resources :products
