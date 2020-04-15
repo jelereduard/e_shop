@@ -1,6 +1,6 @@
 - @categories=Category.all
 - if session[:current_category].nil?
-  = set_category
+  - set_category
 
 .center.jumbotron
   - if not user_signed_in?
@@ -38,7 +38,6 @@
         -group.each do |category|  
           .tab-pane.fade.in{:id => "#{category.name}"}
             - @cat = Category.find(category.id)
-            - products=Product.all
             - @products = @cat.products
             .container-fluid
               - @products.in_groups_of(4, false).each_with_index do |group, index|
