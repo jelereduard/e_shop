@@ -6,25 +6,42 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #777;
+
+$davys-grey:#5b5b5b;
+$nyanza:#e9fae3;
+$tea-green:#d7f2ba;
+$dark-jungle-green:#1f2421;
+$nickel:#74776b;
+
 $black-leather-jacket:#223127;
 $blanched-almond:#FFE8D1;
+$rackley:#568EA3;
 $sea-serpent:#68C3D4;
+$pastel-brown:#826251;
 /* universal */
 
 body {
-  padding-top: 50px;  
+  padding-top: 90px;
+  background-color: $blanched-almond;
+  
   .jumbotron{
+    background: $rackley;
     box-shadow: 0px 0px 15px 0px rgba(0, 65, 60, 0.95);
     background-color: transparent;
   }
+
   .container-fluid{
-    padding-top: 10px;
+    border-radius: 5px; 
+    border: 10px solid rgba(0, 0, 0, 0.1);
   }
 }
 
+section {
+  overflow: auto;
+}
+
 textarea {
-  resize: none;
-  height: 100px;
+  resize: vertical;
 }
 
 .center {
@@ -33,6 +50,34 @@ textarea {
     margin-bottom: 10px;
   }
 }
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
 
 /* header */
 header.navbar.navbar-inverse.navbar-fixed-top{
@@ -43,10 +88,12 @@ header.navbar.navbar-inverse.navbar-fixed-top{
   position: absolute;
   left: 50%;
   margin-left: -50px !important;
-  margin-top: 15px;
+  display: block;
   font-size: 1.7em;
   color: $blanched-almond;
+  text-transform: uppercase;
   letter-spacing: -1px;
+  padding-top: 9px;
   font-weight: bold;
   &:hover {
     color: $sea-serpent;

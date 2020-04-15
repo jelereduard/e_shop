@@ -8,7 +8,7 @@
     %p Sign in or create an account. 
     = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
   - else
-    %h1 Home
+    %h1 "#{session[:current_category]}"
     
     %ul.nav.nav-tabs
       %li.active
@@ -33,12 +33,12 @@
                       %p.card-text #{item.description}
                     %a.btn.btn-primary{:href => "#"} 
                       %h5 Add to Cart!
-
+        = will_paginate @products
       - @categories.in_groups_of(3, false).each_with_index do |group, index|
         -group.each do |category|  
           .tab-pane.fade.in{:id => "#{category.name}"}
             - @cat = Category.find(category.id)
-            - @products = @cat.products
+            - @products = @cat.products.paginate(page: params[:page], per_page: 16)
             .container-fluid
               - @products.in_groups_of(4, false).each_with_index do |group, index|
                 .row-fluid
@@ -51,3 +51,4 @@
                           %p.card-text #{item.description}
                         %a.btn.btn-primary{:href => "#"} 
                           %h5 Add to Cart!
+            = will_paginate @products
