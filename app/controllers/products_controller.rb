@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     flash[:success] = "Product deleted"
-    redirect_back(fallback_location: root_url)
+    redirect_back(fallback_location: dashboard_path)
   end
 
   private

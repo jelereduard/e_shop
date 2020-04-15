@@ -8,13 +8,13 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     if user.admin?
-      #can :manage, :all
-      can :manage, Product do |product|
-        can? :manage, product
-      end
+      can :manage, :all
+      # can :manage, Product do |product|
+      #   can? :manage, product
+      # end
     else
       can :read, :all
-      can [:edit, :destroy], Product
+      # can [:edit, :destroy], Product
     end
     #
     # The first argument to `can` is the action you are giving the user
