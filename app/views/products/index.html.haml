@@ -8,17 +8,18 @@
     %p Sign in or create an account. 
     = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
   - else
-    %h1 "#{session[:current_category]}"
+    %h1 Shop
     
     %ul.nav.nav-tabs
       %li.active
-        %a{ "data-toggle" => "tab",  :href => "#home"} Home
+        %a{ "data-toggle" => "tab",  :href => "#home", :onclick => '$("ul.nav-tabs li.active").text();'} Home
           
       - @categories.in_groups_of(3, false).each_with_index do |group, index|
         -group.each do |category|  
           %li
-            %a{ "data-toggle" => "tab", :href => "#"+"#{category.name}"} #{category.name}
-      
+            %a{ "data-toggle" => "tab", :href => "#"+"#{category.name}",:onclick => '$("ul.nav-tabs li.active").text();' } #{category.name}
+
+
     .tab-content
       #home.tab-pane.fade.in.active
         .container-fluid
@@ -33,7 +34,7 @@
                       %p.card-text #{item.description}
                     %a.btn.btn-primary{:href => "#"} 
                       %h5 Add to Cart!
-        = will_paginate @products
+          = will_paginate @products
       - @categories.in_groups_of(3, false).each_with_index do |group, index|
         -group.each do |category|  
           .tab-pane.fade.in{:id => "#{category.name}"}
@@ -51,4 +52,4 @@
                           %p.card-text #{item.description}
                         %a.btn.btn-primary{:href => "#"} 
                           %h5 Add to Cart!
-            = will_paginate @products
+              = will_paginate @products

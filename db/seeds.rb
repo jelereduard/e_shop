@@ -17,20 +17,6 @@ User.create!(
     last_name: "Eduard")
 
 
-# Products
-
-20.times do |n|
-    name=Faker::Food.dish
-    description=Faker::Food.description
-    price=rand(10.0...99.99).round(2)
-    Product.create!(
-        name: name,
-        price: price,
-        description: description,
-        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
-    )
-end
-
 # Categories
 
 Category.create!(
@@ -44,3 +30,44 @@ Category.create!(
 Category.create!(
     name: "Pasta"
 )
+
+# Products
+
+40.times do |n|
+    name=Faker::Food.dish
+    description=Faker::Food.description
+    price=rand(10.0...99.99).round(2)
+    Product.create!(
+        name: name,
+        price: price,
+        description: description,
+        category_id: 1,
+        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
+    )
+end
+
+40.times do |n|
+    name=Faker::Food.dish
+    description=Faker::Food.description
+    price=rand(10.0...99.99).round(2)
+    Product.create!(
+        name: name,
+        price: price,
+        description: description,
+        category_id: 2,
+        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
+    )
+end
+
+40.times do |n|
+    name=Faker::Food.dish
+    description=Faker::Food.description
+    price=rand(10.0...99.99).round(2)
+    Product.create!(
+        name: name,
+        price: price,
+        description: description,
+        category_id: 3,
+        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
+    )
+end

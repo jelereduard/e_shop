@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def index
+    # byebug
     @products = Product.all.paginate(page: params[:page], per_page: 16)
   end
 
