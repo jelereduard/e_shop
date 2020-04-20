@@ -7,7 +7,7 @@
     = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
   - else
     %h1 Shop
-    
+    %br
     %ul.nav.nav-tabs
       %li.active
         %a{ "data-toggle" => "tab",  :href => "#home", :onclick => '$("ul.nav-tabs li.active").text();'} Home
@@ -17,6 +17,7 @@
           %li
             %a{ "data-toggle" => "tab", :href => "#"+"#{category.name}",:onclick => '$("ul.nav-tabs li.active").text();' } #{category.name}
 
+    %br
 
     .tab-content
       #home.tab-pane.fade.in.active

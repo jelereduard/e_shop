@@ -15,5 +15,6 @@
   %img.card-img-top{:alt => "Card image cap", :src => @product.image_url(:thumb)}
 - if can? :manage, Product
   = link_to 'Edit', edit_product_path(@product)
-
-= link_to 'Back', dashboard_path
+  = link_to 'Back', dashboard_path
+- else
+  = link_to 'Back', products_path

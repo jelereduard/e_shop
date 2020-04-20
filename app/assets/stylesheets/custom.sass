@@ -1,0 +1,95 @@
+@import "bootstrap-sprockets" 
+@import "bootstrap" 
+@import "card" 
+@import "grid" 
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #777
+$black-leather-jacket:#223127
+$blanched-almond:#FFE8D1
+$sea-serpent:#68C3D4
+/* universal */
+
+.container
+  width: auto  !important
+  padding: 0px
+  margin: 0px
+
+
+body 
+  padding-top: 50px
+  .jumbotron
+    box-shadow: 0px 0px 15px 0px rgba(0, 65, 60, 0.95) 
+    background-color: transparent 
+   
+  .container-fluid 
+    padding-top: 10px 
+   
+ 
+
+textarea  
+  resize: none 
+  height: 100px 
+ 
+
+.center  
+  text-align: center 
+  h1  
+    margin-bottom: 10px 
+   
+ 
+
+/* header */
+header.navbar.navbar-inverse.navbar-fixed-top 
+  background-color: $black-leather-jacket
+  padding-right: 20px !important
+ 
+
+#logo  
+  position: absolute 
+  left: 50% 
+  margin-left: -50px !important 
+  margin-top: 15px 
+  font-size: 1.7em 
+  color: $blanched-almond 
+  letter-spacing: -1px 
+  font-weight: bold 
+  &:hover  
+    color: $sea-serpent 
+    text-decoration: none 
+    background-color: $black-leather-jacket 
+   
+ 
+
+/* footer */
+
+footer  
+  margin-top: 45px 
+  padding-top: 5px 
+  border-top: 1px solid $gray-medium-light 
+  color: $gray-light 
+  a  
+    color: $gray 
+    &:hover  
+      color: $gray-darker 
+     
+   
+  small  
+    float: left 
+   
+  ul  
+    float: right 
+    list-style: none 
+    li  
+      float: left 
+      margin-left: 15px 
+     
+   
+ 
+
+  /* form */
+
+.form-inputs 
+  width: 300px 
+ 
