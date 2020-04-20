@@ -1,6 +1,4 @@
 - @categories=Category.all
-- if session[:current_category].nil?
-  - set_category
 
 .center.jumbotron
   - if not user_signed_in?
@@ -22,34 +20,9 @@
 
     .tab-content
       #home.tab-pane.fade.in.active
-        .container-fluid
-          - @products.in_groups_of(4, false).each_with_index do |group, index|
-            .row-fluid
-              - group.each do |item|
-                .col-lg-3.col-md-4.col-sm-6.col-xs-12
-                  .card
-                    %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
-                    .card-body
-                      %h5.card-title #{item.name}: #{number_to_currency(item.price)}
-                      %p.card-text #{item.description}
-                    %a.btn.btn-primary{:href => "#"} 
-                      %h5 Add to Cart!
-          = will_paginate @products
+        = render 'products_category'
       - @categories.in_groups_of(3, false).each_with_index do |group, index|
         -group.each do |category|  
           .tab-pane.fade.in{:id => "#{category.name}"}
-            - @cat = Category.find(category.id)
-            - @products = @cat.products.paginate(page: params[:page], per_page: 16)
-            .container-fluid
-              - @products.in_groups_of(4, false).each_with_index do |group, index|
-                .row-fluid
-                  - group.each do |item|
-                    .col-lg-3.col-md-4.col-sm-6.col-xs-12
-                      .card
-                        %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
-                        .card-body
-                          %h5.card-title #{item.name}: #{number_to_currency(item.price)}
-                          %p.card-text #{item.description}
-                        %a.btn.btn-primary{:href => "#"} 
-                          %h5 Add to Cart!
-              = will_paginate @products
+            - show_category(category)
+            = render 'products_category'
