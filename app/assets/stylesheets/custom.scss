@@ -11,6 +11,12 @@ $blanched-almond:#FFE8D1;
 $sea-serpent:#68C3D4;
 /* universal */
 
+.container{
+  width: auto  !important;
+  padding: 0px;
+  margin: 0px;
+}
+
 body {
   padding-top: 50px;  
   .jumbotron{

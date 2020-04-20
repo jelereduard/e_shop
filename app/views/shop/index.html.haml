@@ -1,7 +1,16 @@
-.container.center
+.container.center.index
   - if not user_signed_in?
     %h1 Welcome!!
     %p Sign in or create an account. 
     = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
   - else
-    %h1 Shop
+    .jumbotron
+      %h1 Welcome!!
+      %br
+      %a.btn.btn-primary{:href => products_path} 
+        %h5 Browse products!
+    %br
+    %h1.left Why choose our products?
+    %br
+    = image_tag 'background_burger.jpg', class: 'bg-img'
+    
