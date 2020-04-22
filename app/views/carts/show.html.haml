@@ -2,6 +2,23 @@
 %p
   %strong User:
   = @cart.user_id
-= link_to 'Edit', edit_cart_path(@cart)
+
+.keep-shopping
+  = link_to 'Keep Shopping', products_path, class: "button is-warning"
+
+%section.section
+  = render(@cart.order_items)
+  .cols
+    .col
+      = button_to 'Empty Cart', @cart, method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger"
+
+    .col.total
+      .title
+        %span.h5
+          Total:
+        = number_to_currency(@cart.total_price)
+
+- if can? :manage, Cart  
+  = link_to 'Edit', edit_cart_path(@cart)
 |
 = link_to 'Back', carts_path

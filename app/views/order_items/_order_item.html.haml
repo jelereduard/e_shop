@@ -1,0 +1,17 @@
+.columns.align-items-center
+  .column.is-1
+    = order_item.quantity
+  .column.is-2
+    %figure.is-128x128.image
+      = image_tag(order_item.product.image_url(:thumb))
+  .column.is-9
+    %strong= order_item.product.name
+    .columns.align-items-center
+      .content.column.is-9
+        = truncate(order_item.product.description, length: 140)
+      .column.is-3.has-text-right
+        %strong.f4= number_to_currency(order_item.total_price)
+.has-text-right
+  = link_to 'Remove Item', order_item, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-small mb4"
+= succeed "/" do
+  %hr/

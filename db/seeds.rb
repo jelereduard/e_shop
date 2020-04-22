@@ -14,8 +14,16 @@ User.create!(
     password: "foobar", 
     password_confirmation: "foobar", 
     first_name: "Jeler", 
-    last_name: "Eduard")
+    last_name: "Eduard",
+    admin: true)
 
+User.create!(
+    email: "nonadmin@yahoo.com", 
+    password: "foobar", 
+    password_confirmation: "foobar", 
+    first_name: "Jeler", 
+    last_name: "Alexandru",
+    admin: false)
 
 # Categories
 
