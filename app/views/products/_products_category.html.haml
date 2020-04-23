@@ -9,5 +9,7 @@
               .card-body
                 %h5.card-title #{item.name}: #{number_to_currency(item.price)}
                 %p.card-text #{item.description}
-            = button_to 'Add to cart', order_items_path(product_id: item), class: "btn btn-primary"
+            .btn.btn-primary
+              = button_to 'Add to cart', order_items_path(product_id: item)
+
   = will_paginate @products

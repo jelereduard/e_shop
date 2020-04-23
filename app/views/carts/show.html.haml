@@ -1,9 +1,9 @@
 %p#notice= notice
 %p
 
-.keep-shopping
-  = link_to 'Go back to products', products_path, class: "button is-warning"
-%br
+.btn.btn-primary.keep-shopping
+  = link_to 'Go back to products', products_path
+
 %table.table.table-striped.table-bordered
   %thead.thead-dark
     %tr
@@ -20,6 +20,8 @@
           (
           = number_to_currency(item.product.price)
           )
+          .has-text-right
+            = link_to 'Remove Item', item, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-small mb4"
         %td
           = number_to_currency(item.total_price)
   %tfooter
@@ -34,5 +36,5 @@
 
 - if can? :manage, Cart  
   = link_to 'Edit', edit_cart_path(@cart)
-|
-= link_to 'Back', carts_path
+  |
+  = link_to 'Back', carts_path

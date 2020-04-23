@@ -4,7 +4,8 @@
       = link_to "e-shop", root_path, id: "logo"
       %nav
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Cart",   cart_path(@cart.id)
+          %li
+            = link_to "Cart",   cart_path(@cart.id), class: "glyphicon glyphicon-shopping-cart"
           %li= link_to "Help",   help_path
           - if user_signed_in?
             %li.dropdown
@@ -20,3 +21,4 @@
                 %li= link_to "Log Out", destroy_user_session_path, method: :delete, class: "navbar-item"
           - else
             %li= link_to "Sign In", new_user_session_path, class: "navbar-item button is-warning"
+
