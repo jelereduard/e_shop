@@ -1,22 +1,36 @@
 %p#notice= notice
 %p
-  %strong User:
-  = @cart.user_id
 
 .keep-shopping
-  = link_to 'Keep Shopping', products_path, class: "button is-warning"
-
-%section.section
-  = render(@cart.order_items)
-  .cols
-    .col
-      = button_to 'Empty Cart', @cart, method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger"
-
-    .col.total
-      .title
-        %span.h5
-          Total:
+  = link_to 'Go back to products', products_path, class: "button is-warning"
+%br
+%table.table.table-striped.table-bordered
+  %thead.thead-dark
+    %tr
+      %th{:scope => "col"} Product
+      %th{:scope => "col"} Price
+  %tbody
+    - @products_in_cart=@cart.order_items
+    - @products_in_cart.each do |item|
+      %tr
+        %td
+          = item.quantity
+          X
+          = item.product.name
+          (
+          = number_to_currency(item.product.price)
+          )
+        %td
+          = number_to_currency(item.total_price)
+  %tfooter
+    %tr
+      %td
+        %h5 Total:
+      %td
         = number_to_currency(@cart.total_price)
+    
+= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger"
+
 
 - if can? :manage, Cart  
   = link_to 'Edit', edit_cart_path(@cart)
