@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+  before_action :set_cart_edit, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -25,7 +25,7 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    @cart = Cart.new(cart_params)
+    @cart = Cart.new(cart_params) 
 
     respond_to do |format|
       if @cart.save
@@ -55,8 +55,10 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy 
-    @cart.destroy if @cart.id == session[:cart_id]
-    session[:cart_id] = nil
+    if @cart.id == session[:cart_id]
+      session[:cart_id] = nil 
+    end
+    @cart.destroy 
     respond_to do |format|
       format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
@@ -65,7 +67,7 @@ class CartsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_cart
+    def set_cart_edit
       @cart = Cart.find(params[:id])
     end
 

@@ -1,3 +1,4 @@
+
 %body
   %header.navbar.navbar-fixed-top.navbar-inverse
     .container
@@ -5,6 +6,7 @@
       %nav
         %ul.nav.navbar-nav.navbar-right
           %li
+            
             = link_to "Cart",   cart_path(@cart.id), class: "glyphicon glyphicon-shopping-cart"
           %li= link_to "Help",   help_path
           - if user_signed_in?

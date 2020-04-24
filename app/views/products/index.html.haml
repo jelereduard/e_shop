@@ -1,3 +1,6 @@
+%p#notice= notice
+%p
+
 - @categories=Category.all
 
 .center.jumbotron
@@ -17,13 +20,13 @@
           %li
             %a{ "data-toggle" => "tab", :href => "#"+"#{category.name}",:onclick => '$("ul.nav-tabs li.active").text();' } #{category.name}
 
-    %br
+  %br
 
-    .tab-content
-      #home.tab-pane.fade.in.active
-        = render 'products_category'
-      - @categories.in_groups_of(3, false).each_with_index do |group, index|
-        -group.each do |category|  
-          .tab-pane.fade.in{:id => "#{category.name}"}
-            - show_category(category)
-            = render 'products_category'
+  .tab-content
+    #home.tab-pane.fade.in.active
+      = render 'products_category'
+    - @categories.in_groups_of(3, false).each_with_index do |group, index|
+      -group.each do |category|  
+        .tab-pane.fade.in{:id => "#{category.name}"}
+          - show_category(category)
+          = render 'products_category'

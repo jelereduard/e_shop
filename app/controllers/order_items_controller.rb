@@ -11,13 +11,14 @@ class OrderItemsController < ApplicationController
         @order_item = OrderItem.new
     end
     def create
+        if @cart.nil?
+            @cart = Cart.create(user_id: current_user.id)
+        end
         product = Product.find(params[:product_id])
-        
-        
         @order_item = @cart.add_product(product)
         respond_to do |format|
             if @order_item.save
-              format.html { redirect_to @order_item.cart, notice: 'Product was successfully added to current cart! '+ "#{@cart.id}" }
+              format.html { redirect_to products_path, notice: 'Product was successfully added to current cart! '+ "#{@cart.id}" }
               format.json { render :show, status: :created, location: @order_item }
             else
               format.html { render :new }
@@ -39,7 +40,11 @@ class OrderItemsController < ApplicationController
         end
     end
     def destroy
-        @cart = Cart.find(session[:cart_id])
+        if !session[:cart_id].nil?
+            @cart = Cart.find(session[:cart_id])
+        else
+            @cart = Cart.find_by(user_id: current_user.id)
+        end
         @order_item.destroy
         respond_to do |format|
             format.html { redirect_to cart_path(@cart), notice: 'Item was successfully removed.' }

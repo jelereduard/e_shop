@@ -20,6 +20,7 @@
           (
           = number_to_currency(item.product.price)
           )
+
           .has-text-right
             = link_to 'Remove Item', item, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-small mb4"
         %td
