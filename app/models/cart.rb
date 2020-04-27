@@ -19,7 +19,7 @@ class Cart < ApplicationRecord
       if current_item.quantity > 1
         current_item.decrement(:quantity)
       else
-        current_item.delete
+        current_item.destroy
       end
     end
     

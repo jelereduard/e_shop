@@ -28,6 +28,7 @@ class OrderItemsController < ApplicationController
     end
     def edit
     end
+    
     def update
         respond_to do |format|
             if @order_item.update(order_item_params)
@@ -39,13 +40,15 @@ class OrderItemsController < ApplicationController
             end
         end
     end
+
     def destroy
         if !session[:cart_id].nil?
             @cart = Cart.find(session[:cart_id])
         else
             @cart = Cart.find_by(user_id: current_user.id)
         end
-        @order_item.destroy
+        product = Product.find(params[:product_id])
+        @order_item = @cart.remove_product(product)
         respond_to do |format|
             format.html { redirect_to cart_path(@cart), notice: 'Item was successfully removed.' }
             format.json { head :no_content }
