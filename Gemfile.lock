@@ -399,6 +399,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (5.19.0)
     temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -460,6 +461,7 @@ DEPENDENCIES
   simple_form
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
+  stripe
   turbolinks (= 5.0.1)
   tzinfo-data
   uglifier (= 3.2.0)
