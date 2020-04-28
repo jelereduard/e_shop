@@ -1,15 +1,16 @@
-%ul.nav.nav-tabs
-  %li.active
-    %a{ "data-toggle" => "tab",  :href => "#products"} Products
-  %li
-    %a{ "data-toggle" => "tab",  :href => "#categories"} Categories
-  %li
-    %a{ "data-toggle" => "tab",  :href => "#carts"} Carts
+.dashboard
+  %ul.nav.nav-tabs.nav-fill
+    %li.active
+      %a{ "data-toggle" => "tab",  :href => "#products"} Products
+    %li
+      %a{ "data-toggle" => "tab",  :href => "#categories"} Categories
+    %li
+      %a{ "data-toggle" => "tab",  :href => "#carts"} Carts
 
-.tab-content
-  #products.tab-pane.fade.in.active
-    = render 'products/products_dashboard'
-  #categories.tab-pane.fade.in
-    = render 'categories/categories_dashboard'
-  #carts.tab-pane.fade.in
-    = render 'carts/carts_dashboard'
+  .tab-content
+    #products.tab-pane.fade.in.active
+      = render 'products/products_dashboard'
+    #categories.tab-pane.fade.in
+      = render 'categories/categories_dashboard'
+    #carts.tab-pane.fade.in
+      = render 'carts/carts_dashboard'

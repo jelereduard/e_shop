@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
-    include CurrentCart
+    # include CurrentCart
     before_action :set_order_item, only: [:show, :edit, :update, :destroy]
-    before_action :set_cart, only: [:create]
+    # before_action :set_cart, only: [:create]
     def index
         @order_items = OrderItem.all
     end
@@ -18,7 +18,7 @@ class OrderItemsController < ApplicationController
         @order_item = @cart.add_product(product)
         respond_to do |format|
             if @order_item.save
-              format.html { redirect_to products_path, notice: 'Product was successfully added to current cart! '+ "#{@cart.id}" }
+              format.html {}
               format.json { render :show, status: :created, location: @order_item }
             else
               format.html { render :new }

@@ -1,0 +1,34 @@
+#product-new.modal.fade{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog{role: "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h5#modalTitleLabel.modal-title Add Product
+      = form_with model: product do |f|
+        .modal-body.px-4
+          .flex-row
+            %label Name
+            %span
+              = f.text_field :name, placeholder: 'Name', class: 'form-control'
+          %br/
+          .flex-row
+            %label Category
+            %span
+              = f.select :category_id, Category.all.collect{|c| [c.name,c.id]},{},class: 'custom-select'
+          %br/
+          .flex-row
+            %label Price
+            %span
+              = f.text_field :price, placeholder: 'Price', class: 'form-control'
+          %br/
+          .flex-row
+            %label Description
+            %span
+              = f.text_area :description, placeholder: 'Description', class: 'form-control'
+          %br/
+          = f.file_field :image, accept: 'image/jpeg,image/gif,image/png'
+          %br/
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} Close
+          = f.submit modal_action, class: 'btn btn-secondary'

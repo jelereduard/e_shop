@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  before_action :set_cart_edit, only: [:show, :edit, :update, :destroy]
+  # before_action :set_cart_edit, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -11,15 +11,6 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-  end
-
-  # GET /carts/new
-  def new
-    @cart = Cart.new
-  end
-
-  # GET /carts/1/edit
-  def edit
   end
 
   # POST /carts
@@ -66,11 +57,7 @@ class CartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cart_edit
-      @cart = Cart.find(params[:id])
-    end
-
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
       params.require(:cart).permit(:user_id)

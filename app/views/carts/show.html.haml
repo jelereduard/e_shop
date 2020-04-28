@@ -1,8 +1,6 @@
+%br/
 %p#notice= notice
 %p
-
-.btn.btn-primary.keep-shopping
-  = link_to 'Go back to products', products_path
 
 %table.table.table-striped.table-bordered
   %thead.thead-dark
@@ -18,20 +16,24 @@
           X
           = item.product.name
           (
-          = number_to_currency(item.product.price)
+          = number_to_currency(item.product.price, precision: 2)
           )
-          %a{:href => order_item_path(product_id: item.product)}-
+          -# %a{:href => order_item_path(product_id: item.product)}-
         %td
-          = number_to_currency(item.total_price)
+          = number_to_currency(item.total_price, precision: 2)
   %tfooter
     %tr
       %td
-        %h5 Total:
+        %strong Total:
       %td
-        = number_to_currency(@cart.total_price)
-    
-= button_to 'Empty Cart', @cart, method: :delete, data: {confirm: "Are you sure?"}, class: "button is-danger"
-
+        = number_to_currency(@cart.total_price, precision: 2)
+.checkout-buttons
+  = link_to 'Go back to products', products_path, class: "btn btn-primary"
+  .pull-right
+    = link_to "Checkout", "#", class: "btn btn-primary"
+  .pull-right
+    = button_to 'Empty Cart', @cart, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+%br/
 
 - if can? :manage, Cart  
   = link_to 'Edit', edit_cart_path(@cart)

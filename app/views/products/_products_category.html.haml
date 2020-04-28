@@ -1,15 +1,14 @@
-.container-fluid
+.grid.container-fluid
   - @products.in_groups_of(4, false).each_with_index do |group, index|
     .row-fluid
       - group.each do |item|
         .col-lg-3.col-md-4.col-sm-6.col-xs-12
-          .card
+          .card.center
             %a{:href => "products/#{item.id}"}
               %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
               .card-body
                 %h5.card-title #{item.name}: #{number_to_currency(item.price)}
                 %p.card-text #{item.description}
-            .btn.btn-primary
-              = button_to 'Add to cart', order_items_path(product_id: item) 
+            = button_to 'Add to cart', order_items_path(product_id: item),class: "btn btn-primary align-self-end"
 
   = will_paginate @products
