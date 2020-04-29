@@ -47,8 +47,9 @@ class OrderItemsController < ApplicationController
         else
             @cart = Cart.find_by(user_id: current_user.id)
         end
-        product = Product.find(params[:product_id])
-        @order_item = @cart.remove_product(product)
+        # product = Product.find(params[:product_id])
+        # @order_item = @cart.remove_product(product)
+        @order_item.destroy
         respond_to do |format|
             format.html { redirect_to cart_path(@cart), notice: 'Item was successfully removed.' }
             format.json { head :no_content }

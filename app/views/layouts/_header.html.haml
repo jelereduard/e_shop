@@ -12,8 +12,8 @@
         .collapse.navbar-collapse#burger-menu
           %ul.nav.navbar-nav.navbar-right
             %li
-              = link_to "#{@cart.order_items.sum(&:quantity)}", cart_path(@cart.id), class: "glyphicon glyphicon-shopping-cart"
-            - if user_signed_in?
+              = link_to "#{@cart.order_items.sum(&:quantity)}", cart_path(@cart.id), class: "glyphicon glyphicon-shopping-cart", id:"cart_item"
+            - if current_user.present?
               %li= link_to "My orders", "#"
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
