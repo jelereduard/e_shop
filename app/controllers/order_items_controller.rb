@@ -1,7 +1,5 @@
 class OrderItemsController < ApplicationController
-    # include CurrentCart
     before_action :set_order_item, only: [:show, :edit, :update, :destroy]
-    # before_action :set_cart, only: [:create]
     def index
         @order_items = OrderItem.all
     end
@@ -13,7 +11,7 @@ class OrderItemsController < ApplicationController
     def create
         if @cart.nil?
             @cart = Cart.create(user_id: current_user.id)
-        end
+        end 
         product = Product.find(params[:product_id])
         @order_item = @cart.add_product(product)
         respond_to do |format|

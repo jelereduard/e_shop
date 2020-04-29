@@ -23,6 +23,12 @@
               = f.text_field :price, placeholder: 'Price', class: 'form-control'
           %br/
           .flex-row
+            %label Stock
+            %span
+              = f.text_field :stock, placeholder: 'Stock', class: 'form-control'
+          %br/
+
+          .flex-row
             %label Description
             %span
               = f.text_area :description, placeholder: 'Description', class: 'form-control'
