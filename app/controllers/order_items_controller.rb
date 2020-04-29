@@ -16,8 +16,7 @@ class OrderItemsController < ApplicationController
         @order_item = @cart.add_product(product)
         respond_to do |format|
             if @order_item.save
-              format.html {}
-              format.json { render :show, status: :created, location: @order_item }
+              format.json {render json: {order_item: @order_items}}
             else
               format.html { render :new }
               format.json { render json: @order_item.errors, status: :unprocessable_entity }

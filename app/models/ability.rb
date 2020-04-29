@@ -4,17 +4,22 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :create, :read, :update, :destroy, to: :crud
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    if user.admin?
-      can :manage, :all
-      # can :manage, Product do |product|
-      #   can? :manage, product
-      # end
-    else
-      can :read, :all
-      # can [:edit, :destroy], Product
+    can :read, Product
+    can [:read, :update, :destory], Cart
+    
+    if user.present?
+      can [:read, :update, :destory], User, user_id: user.id
+
+      if user.admin?
+        can :crud, [Category, Product, OrderItem]
+        can [:create, :read, :destroy], Cart
+        can :crud, Cart, user_id: user.id
+        
+      end
     end
     #
     # The first argument to `can` is the action you are giving the user
