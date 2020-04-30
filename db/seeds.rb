@@ -50,7 +50,8 @@ Category.create!(
         price: price,
         description: description,
         category_id: 1,
-        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
+        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg")),
+        stock: Faker::Number.within(range: 0..20)
     )
 end
 
@@ -63,7 +64,8 @@ end
         price: price,
         description: description,
         category_id: 2,
-        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
+        image: File.open(File.join(Rails.root, "/app/assets/images/soup.jpg")),
+        stock: Faker::Number.within(range: 0..20)
     )
 end
 
@@ -76,6 +78,7 @@ end
         price: price,
         description: description,
         category_id: 3,
-        image: File.open(File.join(Rails.root, "/app/assets/images/burger.jpeg"))
+        image: File.open(File.join(Rails.root, "/app/assets/images/pasta.jpg")),
+        stock: Faker::Number.within(range: 0..20)
     )
 end

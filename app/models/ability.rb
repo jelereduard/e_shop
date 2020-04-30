@@ -4,35 +4,33 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :create, :read, :update, :destroy, to: :crud
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    if user.admin?
-      can :manage, :all
-      # can :manage, Product do |product|
-      #   can? :manage, product
-      # end
-    else
-      can :read, :all
-      # can [:edit, :destroy], Product
+    can [:read, :edit, :destory], Cart do |cart|
+      cart.id == session[:cart_id]
     end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    cannot [:create, :edit, :destroy], Category
+    cannot :crud, User
+    cannot [:create, :edit, :destroy], Product
+    cannot :curd, OrderItem
+    
+    if user.present?
+      # can [:read, :update, :destory], User, user_id: user.id
+      can :crud, Cart do |cart|
+        cart.user_id == user.id
+      end
+      cannot [:create, :edit, :destroy], Category
+      can :crud, User, user_id: user.id
+      cannot [:create, :edit, :destroy], Product
+      cannot :curd, OrderItem
+    end
+    if user.admin?
+        # can :read, :all
+        # can [:create, :edit, :destroy], Cart, user_id: user.id
+        can :manage, :all
+    end
+    
   end
 end
