@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations'
   }
-  # get 'shop/index'
   root 'shop#index'
 
   get  '/home',    to: 'products#index'
@@ -16,7 +15,11 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :products
-  resources :order_items
+  resources :order_items do 
+    member do
+      get :decrement_quantity
+    end
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

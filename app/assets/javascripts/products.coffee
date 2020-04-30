@@ -1,8 +1,5 @@
 $(document).ready -> 
-  checkServerResp = (url, data) ->
-
   $(".add-to-cart").on "click",(e) ->
-    e.preventDefault
     url = $(@).attr("data-url")
     data={}
     data['product_id']=$(@).attr("data-id")
@@ -12,3 +9,13 @@ $(document).ready ->
       data: data 
       dataType: "json"
       success: (result) ->
+        if result.status=="success"
+          total_items=parseInt($("#cart_item").text())
+          total_items+=1
+          $("#cart_item").text(total_items)
+        else
+          if result.product_id? && result.status=="failed"
+            product_button="a[data-id="+result.product_id+"]"
+            $(product_button).attr("disabled",true).addClass("disabled")
+            product_text='a[href="products/'+result.product_id+'"]'
+            $(product_text).find("div").find("p.out-of-stock").removeClass("hidden")

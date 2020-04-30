@@ -8,36 +8,29 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    can :read, Product
-    can [:read, :update, :destory], Cart
+    can [:read, :edit, :destory], Cart do |cart|
+      cart.id == session[:cart_id]
+    end
+    cannot [:create, :edit, :destroy], Category
+    cannot :crud, User
+    cannot [:create, :edit, :destroy], Product
+    cannot :curd, OrderItem
     
     if user.present?
-      can [:read, :update, :destory], User, user_id: user.id
-
-      if user.admin?
-        can :crud, [Category, Product, OrderItem]
-        can [:create, :read, :destroy], Cart
-        can :crud, Cart, user_id: user.id
-        
+      # can [:read, :update, :destory], User, user_id: user.id
+      can :crud, Cart do |cart|
+        cart.user_id == user.id
       end
+      cannot [:create, :edit, :destroy], Category
+      can :crud, User, user_id: user.id
+      cannot [:create, :edit, :destroy], Product
+      cannot :curd, OrderItem
     end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    if user.admin?
+        # can :read, :all
+        # can [:create, :edit, :destroy], Cart, user_id: user.id
+        can :manage, :all
+    end
+    
   end
 end

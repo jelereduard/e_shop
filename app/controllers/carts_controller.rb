@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  # before_action :set_cart_edit, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+ 
 
   # GET /carts
   # GET /carts.json
@@ -11,6 +11,7 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
+    authorize! :index,Cart
   end
 
   # POST /carts
@@ -67,4 +68,5 @@ class CartsController < ApplicationController
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to root_path, notice: "That cart doesn't exist"
     end
+
 end
