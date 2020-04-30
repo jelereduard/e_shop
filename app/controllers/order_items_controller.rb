@@ -45,15 +45,18 @@ class OrderItemsController < ApplicationController
     end
 
     def destroy
+        @product = @order_item.product
+        @quantity = @product.stock + @order_item.quantity
+
         if !session[:cart_id].nil?
             @cart = Cart.find(session[:cart_id])
         else
             @cart = Cart.find_by(user_id: current_user.id)
         end
-        @product=@order_item.product
-        @quantity=@product.stock+@order_item.quantity
+
         @product.update_attributes(stock: @quantity)
         @order_item.destroy
+
         respond_to do |format|
             format.html { redirect_to cart_path(@cart), notice: 'Product was successfully removed.' }
             format.json { head :no_content }
@@ -68,8 +71,10 @@ class OrderItemsController < ApplicationController
                 else
                     @order_item.destroy
                 end
-                @product=@order_item.product
-                @product.update_attributes(stock: @product.stock+1)
+
+                @product = @order_item.product
+                @product.update_attributes(stock: @product.stock + 1)
+
                 respond_to do |format|
                     format.html { redirect_to cart_path(@cart), notice: 'Item was successfully removed.' }
                     format.json { head :no_content }
@@ -86,7 +91,7 @@ class OrderItemsController < ApplicationController
     private
     
     def set_order_item
-        @order_item=OrderItem.find(params[:id])
+        @order_item = OrderItem.find(params[:id])
     end
     
     def order_item_params

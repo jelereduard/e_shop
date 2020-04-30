@@ -1,7 +1,6 @@
 class CartsController < ApplicationController
   load_and_authorize_resource
  
-
   # GET /carts
   # GET /carts.json
   def index
@@ -11,7 +10,7 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    authorize! :index,Cart
+    authorize! :index, Cart
   end
 
   # POST /carts
@@ -62,11 +61,6 @@ class CartsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
       params.require(:cart).permit(:user_id)
-    end
-
-    def invalid_cart
-      logger.error "Attempt to access invalid cart #{params[:id]}"
-      redirect_to root_path, notice: "That cart doesn't exist"
     end
 
 end

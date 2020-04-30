@@ -7,7 +7,6 @@ class ProductsController < ApplicationController
   end
 
   def index
-    # byebug
     @products = Product.all.paginate(page: params[:page], per_page: 16)
   end
 
@@ -19,12 +18,12 @@ class ProductsController < ApplicationController
     if !can?(:manage, @product)
       redirect_to root_url
     end
+
     @categories = Category.all.map{|c| [ c.name, c.id ] }
   end 
 
   def create
     @product = Product.new(product_params) 
-    # @product.category_id = params[:category_id]
     respond_to do |format|
       if @product.save 
         format.html { redirect_to @product, notice: 'Product was successfully created.' } 
@@ -32,11 +31,9 @@ class ProductsController < ApplicationController
       else 
         format.html { render :new } 
         format.json { render json: @product.errors, status: :unprocessable_entity } 
-        
       end
     end 
   end 
-
 
   def update
     respond_to do |format|
