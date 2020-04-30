@@ -4,7 +4,6 @@ class Cart < ApplicationRecord
 
     def add_product(product)
         current_item = order_items.find_by(product_id: product.id)
-        
         if current_item
           current_item.increment(:quantity)
         else
@@ -13,15 +12,7 @@ class Cart < ApplicationRecord
         current_item
     end
 
-    def remove_product(product)
-      current_item = order_items.find_by(product_id: product.id)
-
-      if current_item.quantity > 1
-        current_item.decrement(:quantity)
-      else
-        current_item.destroy
-      end
-    end
+    
     
     def total_price
         order_items.to_a.sum { |item| item.total_price }
