@@ -2,41 +2,42 @@
 %p#notice= notice
 %p
 .card-table
-  %table.table.table-striped.table-bordered
-    %thead.thead-dark
-      %tr
-        %th.center{ :colspan => "2" } Product
-        %th.center{ :colspan => "2" } Price
-        
-    %tbody
-      - @products_in_cart=@cart.order_items
-      - @products_in_cart.each do |item|
+  .table-responsive
+    %table.table.table-striped.table-bordered
+      %thead.thead-dark
         %tr
-          %td
-            .order-item-details
-              = item.quantity
-              x
-              = item.product.name
-              (
-              = number_to_currency(item.product.price, precision: 2)
-              )
-          %td.plus-minus
-            = link_to '', increment_quantity_order_item_path(item), { class: "glyphicon glyphicon-plus btn btn-default #{item.product.stock.to_i < 1 ? 'disabled' : ''}", disabled: item.product.stock.to_i<1}
-            = link_to '', decrement_quantity_order_item_path(item), { class: "glyphicon glyphicon-minus btn btn-default" }
-          %td
-            .order-item-details.pull-right
-              = number_to_currency(item.total_price, precision: 2)
-          %td.trash-can
-            = link_to '', item, method: :delete, data: { confirm: "Are you sure? " }, class: "glyphicon glyphicon-trash btn btn-default"
-    %tfooter
-      %tr
-        %td{ :colspan => "2"}
-          .total
-            %strong Total:
-        %td{ :colspan => "2"}
-          .total-details
-            = number_to_currency(@cart.total_price, precision: 2)
-        
+          %th.center{ :colspan => "2" } Product
+          %th.center{ :colspan => "2" } Price
+          
+      %tbody
+        - @products_in_cart=@cart.order_items
+        - @products_in_cart.each do |item|
+          %tr
+            %td
+              .order-item-details
+                = item.quantity
+                x
+                = item.product.name
+                (
+                = number_to_currency(item.product.price, precision: 2)
+                )
+            %td.plus-minus
+              = link_to '', increment_quantity_order_item_path(item), { class: "glyphicon glyphicon-plus btn btn-default #{item.product.stock.to_i < 1 ? 'disabled' : ''}", disabled: item.product.stock.to_i<1}
+              = link_to '', decrement_quantity_order_item_path(item), { class: "glyphicon glyphicon-minus btn btn-default" }
+            %td
+              .order-item-details.pull-right
+                = number_to_currency(item.total_price, precision: 2)
+            %td.trash-can
+              = link_to '', item, method: :delete, data: { confirm: "Are you sure? " }, class: "glyphicon glyphicon-trash btn btn-default"
+      %tfooter
+        %tr
+          %td{ :colspan => "2"}
+            .total
+              %strong Total:
+          %td{ :colspan => "2"}
+            .total-details.center
+              = number_to_currency(@cart.total_price, precision: 2)
+          
 .checkout-buttons
   = link_to 'Go back to products', products_path, class: "btn btn-primary"
   .pull-right
