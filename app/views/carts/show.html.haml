@@ -18,9 +18,10 @@
           (
           = number_to_currency(item.product.price, precision: 2)
           )
-          = link_to 'Remove Item', decrement_quantity_order_item_path(item), {data: { confirm: "Are you sure? " }, class: "button is-small mb4"}
-          = link_to 'Remove Product', item, method: :delete, data: { confirm: "Are you sure? " }, class: "button is-small mb4"
-          -# %a{:href => order_item_path(product_id: item.product)}-
+          .pull-right
+            = link_to '', increment_quantity_order_item_path(item), { class: "glyphicon glyphicon-plus" }
+            = link_to '', decrement_quantity_order_item_path(item), { class: "glyphicon glyphicon-minus" }
+            = link_to '', item, method: :delete, data: { confirm: "Are you sure? " }, class: "glyphicon glyphicon-trash"
         %td
           = number_to_currency(item.total_price, precision: 2)
   %tfooter
