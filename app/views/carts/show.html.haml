@@ -36,7 +36,8 @@
         .total
           %strong Total:
       %td{ :colspan => "2"}
-        = number_to_currency(@cart.total_price, precision: 2)
+        .total-details
+          = number_to_currency(@cart.total_price, precision: 2)
       
 .checkout-buttons
   = link_to 'Go back to products', products_path, class: "btn btn-primary"
