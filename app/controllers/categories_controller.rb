@@ -10,6 +10,8 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @products = Product.where(category_id: @category.id)
+    @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
   # GET /categories/new

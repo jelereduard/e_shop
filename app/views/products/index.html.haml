@@ -4,28 +4,20 @@
 - @categories=Category.all
 .products
   .center
-    - if !current_user.present?
-      %h1 Welcome!!
-      %p Sign in or create an account. 
-      = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
-    
+    %h1 Home
+    -# %p Sign in or create an account. 
+    -# = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
       
     %ul.nav.nav-tabs
       %li.active
-        %a{ "data-toggle" => "tab",  :href => "#home", :onclick => '$("ul.nav-tabs li.active").text();'} Home
+        %a{ "data-toggle" => "tab"} Home
           
       - @categories.in_groups_of(3, false).each_with_index do |group, index|
         -group.each do |category|  
           %li
-            %a{ "data-toggle" => "tab", :href => "#"+"#{category.name}",:onclick => '$("ul.nav-tabs li.active").text();' } #{category.name}
-
+            = link_to "#{category.name}", controller: 'categories', action: 'show', id: "#{category.id}"
+            -# %a{ "data-toggle" => "tab", :href => "categories/"+"#{category.id}"} #{category.name}
     %br
-
     .tab-content
-      #home.tab-pane.fade.in.active
+      .tab-pane.fade.in.active
         = render 'products_category'
-      - @categories.in_groups_of(3, false).each_with_index do |group, index|
-        -group.each do |category|  
-          .tab-pane.fade.in{:id => "#{category.name}"}
-            - show_category(category)
-            = render 'products_category'
