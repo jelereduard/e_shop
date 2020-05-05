@@ -1,7 +1,7 @@
 %br/
 %p#notice= notice
 %p
-.card-table
+.cart-table
   .table-responsive
     %table.table.table-striped.table-bordered
       %thead.thead-dark
@@ -10,7 +10,6 @@
           %th.center{ :colspan => "2" } Price
           
       %tbody
-        - @products_in_cart=@cart.order_items
         - @products_in_cart.each do |item|
           %tr
             %td
