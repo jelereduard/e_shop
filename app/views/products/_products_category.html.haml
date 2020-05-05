@@ -1,14 +1,15 @@
-.grid.container-fluid
-  - @products.in_groups_of(4, false).each_with_index do |group, index|
-    .row-fluid
-      - group.each do |item|
-        .col-lg-3.col-md-4.col-sm-6.col-xs-12
-          .card.center
-            %a{:href => "products/#{item.id}"}
-              %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
-              .card-body
-                %p.out-of-stock{class: item.stock.to_i < 1 ? '' : 'hidden' } Out of stock!
-                %h5.card-title #{item.name}: #{number_to_currency(item.price)}
-                %p.card-text #{item.description}
-            = link_to 'Add to cart' ,"javascript:void(0)",{"data-id" => "#{item.id}", "data-url" => "#{order_items_path}",class: "add-to-cart btn btn-primary align-self-end #{item.stock.to_i < 1 ? 'disabled' : ''}", disabled: item.stock.to_i<1}
-  = will_paginate @products
+.products_category
+  .grid.container-fluid
+    - @products.in_groups_of(4, false).each_with_index do |group, index|
+      .row-fluid
+        - group.each do |item|
+          .col-lg-3.col-md-4.col-sm-6.col-xs-12
+            .card.center
+              %a{:href => "products/#{item.id}"}
+                %img.card-img-top{:alt => "Card image cap", :src => item.image_url(:thumb)}
+                .card-body
+                  %p.out-of-stock{class: item.stock.to_i < 1 ? '' : 'hidden' } Out of stock!
+                  %h5.card-title #{item.name}: #{number_to_currency(item.price)}
+                  %p.card-text #{item.description}
+              = link_to 'Add to cart', "javascript:void(0)", { "data-id" => "#{item.id}", "data-url" => "#{order_items_path}", class: "add-to-cart btn btn-primary align-self-end #{item.stock.to_i < 1 ? 'disabled' : ''}", disabled: item.stock.to_i<1}
+    = will_paginate @products
