@@ -16,5 +16,4 @@
 
   .tab-content
     .tab-pane.fade.in.active{:id => "#{@category.name}"}
-      - show_category(@category)
       = render 'products/products_category'

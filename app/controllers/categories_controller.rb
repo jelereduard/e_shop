@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @products = Product.where(category_id: @category.id)
+    @products = @category.products.paginate(page: params[:page], per_page: 16)
     @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
