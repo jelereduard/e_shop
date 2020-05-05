@@ -1,20 +1,28 @@
-%p#notice= notice
-%h1 Carts
+.container
+  .row
+    .col.col-lg-10.offset-lg-1
+      %p#notice= notice
+      %h1 Carts
 
-%br/
-%br/
+      %br/
+      %br/
 
-%table.table-striped.table-bordered
-  %thead
-    %tr
-      %th User
-      %th Cart_id
-      %th{:colspan => "3"}
-  %tbody
-    - @carts.each do |cart|
-      %tr
-        %td= cart.user_id
-        %td= cart.id
-        %td= link_to 'Show', cart
-        %td= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+  .row
+    .col-lg-12
+      %table.table-striped.table-bordered
+        %thead
+          %tr
+            %th.col-lg-4
+              User
+            %th.col-lg-4
+              Cart_id
+            %th.col-lg-4.center{:colspan => "2"}
+              Actions
+        %tbody
+          - @carts.each do |cart|
+            %tr
+              %td.col-lg-2= cart.user_id
+              %td.col-lg-2= cart.id
+              %td.col-lg-2= link_to 'Show', cart
+              %td.col-lg-2= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' }
+      %br/
