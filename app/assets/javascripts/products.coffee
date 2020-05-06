@@ -19,3 +19,11 @@ $(document).ready ->
             $(product_button).attr("disabled",true).addClass("disabled")
             product_text='a[href="products/'+result.product_id+'"]'
             $(product_text).find("div").find("p.out-of-stock").removeClass("hidden")
+  $('#form-filter-products').on 'keypress', (event) ->
+    if event.keyCode == 13
+      query = $(this).val()
+      $.ajax(
+        url: '/products',
+        type: 'GET',
+        data: { qtitle: query }
+    )

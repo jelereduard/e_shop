@@ -6,13 +6,25 @@ class ProductsController < ApplicationController
     @categories = Category.all.map{|c| [ c.name, c.id ] }
   end
 
+  # def index
+  #   @products = Product.search(params[:search]).paginate(page: params[:page], per_page: 16)
+  # end
+
   def index
-    # byebug
-    @products = Product.search(params[:search]).paginate(page: params[:page], per_page: 16)
+    if params[:qtitle]
+      @search_results_products = Product.all.where("lower(name) LIKE lower(?)",'%'+params[:qtitle]+'%').paginate(page: params[:page], per_page: 16)
+      respond_to do |format|
+        format.js { render partial: 'search-results' }
+      end
+    else
+      @products = Product.all.paginate(page: params[:page], per_page: 16)
+    end
+    
+    # render :js => "window.location = '/products?qtitle=#{params[:qtitle]}'"
+
   end
 
   def show
-    
   end
 
   def edit
@@ -62,7 +74,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :price, :description, :category_id, :image, :stock, :search)
+      params.require(:product).permit(:name, :price, :description, :category_id, :image, :stock, :qtitle)
     end
     
 end

@@ -8,12 +8,17 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+
           = link_to "e-shop", root_path, id: "logo"
-          .search-box
-            = form_tag products_path, :method => "get" do
-              = text_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
-              -# = submit_tag("", :name => nil, :class => "glyphicon glyphicon-search")
+
+          -# .input-group.input-search.px-0
+          -#   %input#form-filter-products.form-control{:type => "text"}/
         
+          .main
+            .form-group.has-feedback.has-search
+              %span.glyphicon.glyphicon-search.form-control-feedback
+              %input#form-filter-products.form-control{:placeholder => "Search", :type => "text"}/
+
         .collapse.navbar-collapse#burger-menu
           %ul.nav.navbar-nav.navbar-right
             %li

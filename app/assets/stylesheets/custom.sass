@@ -94,8 +94,26 @@ footer
     padding: 20px 
 
 /* Searchbar */
-.search-box
-  padding-top: 10px
-  padding-left: 10px
-  // position: absolute
-  // left: 65%
+
+.main 
+  width: auto
+  margin-top: 10px
+.form-group
+  margin-bottom: 0px !important
+  
+/* Bootstrap 3 text input with search icon */
+
+.has-search .form-control-feedback 
+  right: initial
+  left: 0
+  color: #ccc
+
+.has-search .form-control 
+  padding-right: 12px
+  padding-left: 34px
+
+@media screen and (max-width: 767px)
+  .glyphicon.glyphicon-search.form-control-feedback
+    display: none
+  body
+    padding-top: 75px
