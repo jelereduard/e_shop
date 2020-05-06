@@ -1,26 +1,27 @@
-%p#notice= notice
-%h1 
-  Categories
-
-%br/
-
-%button.btn.btn-primary{'data-toggle' => 'modal', 'data-target' => '#category-new'} Add Category
-%br/
-%br/
-
-%table.table-striped.table-bordered
-  %thead
-    %tr
-      %th
-        Name
-      %th{:colspan => "3"}
-  %tbody
-    - @categories.each do |category|
-      %tr
-        %td= category.name
-        %td= link_to 'Show', category
-        %td= link_to 'Edit', edit_category_path(category)
-        %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
- 
-= render 'categories/new', category: Category.new, modal_action: 'Create'
+.container
+  .row
+    .col.col-lg-10.offset-lg-1
+      %p#notice= notice
+      %h1 Categories
+      %br/
+      %button.btn.btn-primary{'data-toggle' => 'modal', 'data-target' => '#category-new'} Add Category
+      %br/
+      %br/
+  .row
+    .col-lg-12
+      %table.table-striped.table-bordered
+        %thead
+          %tr
+            %th.col-lg-6
+              Name
+            %th.col-lg-6.center{:colspan => "3"}
+              Actions
+        %tbody
+          - @categories.each do |category|
+            %tr
+              %td.col-lg-6= category.name
+              %td.col-lg-2= link_to 'Show', category
+              %td.col-lg-2= link_to 'Edit', edit_category_path(category)
+              %td.col-lg-2= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  = render 'categories/new', category: Category.new, modal_action: 'Create'
