@@ -9,6 +9,11 @@
             %span.icon-bar
             %span.icon-bar
           = link_to "e-shop", root_path, id: "logo"
+          .search-box
+            = form_tag products_path, :method => "get" do
+              = text_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
+              -# = submit_tag("", :name => nil, :class => "glyphicon glyphicon-search")
+        
         .collapse.navbar-collapse#burger-menu
           %ul.nav.navbar-nav.navbar-right
             %li

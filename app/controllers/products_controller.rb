@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
 
   def index
     # byebug
-    @products = Product.all.paginate(page: params[:page], per_page: 16)
+    @products = Product.search(params[:search]).paginate(page: params[:page], per_page: 16)
   end
 
   def show
@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :price, :description, :category_id, :image, :stock)
+      params.require(:product).permit(:name, :price, :description, :category_id, :image, :stock, :search)
     end
     
 end
