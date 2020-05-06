@@ -1,11 +1,8 @@
 .container
   .row
     .col.col-lg-10.offset-lg-1
-
       %p#notice= notice
-      %h1 
-        Products
-
+      %h1 Products
       %br/
       %button.btn.btn-primary{'data-toggle' => 'modal', 'data-target' => '#product-new'} Add Product
       %br/
@@ -17,7 +14,7 @@
           %tr
             %th.col-lg-6
               Name
-            %th.col-lg-6{:colspan => "3"}
+            %th.col-lg-6.center{:colspan => "3"}
               Actions
         %tbody
           - @products.each do |product|
