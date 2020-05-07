@@ -10,6 +10,20 @@ class Product < ApplicationRecord
   validates :name, length: {maximum: 100}
   validates :price, numericality: {only_decimal: true}, length: {maximum: 5}
   validate  :picture_size
+# CATEGORY = %W{ Burger Pasta Soup }
+
+def self.search(search)
+  if search
+    @products = Product.where(["lower(name) LIKE lower(?)","%#{search}%"])
+      if @products.first.present?
+        @products
+      else
+        @products = Product.all
+      end
+  else
+    @products = Product.all
+  end
+end
 
 private
 # Validates the size of an uploaded image.
