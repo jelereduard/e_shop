@@ -27,6 +27,7 @@ gem 'devise', '~> 4.4'
 gem "haml"
 gem 'cancancan'
 gem 'pry'
+gem 'with_advisory_lock'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri

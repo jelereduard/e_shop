@@ -25,6 +25,13 @@ def self.search(search)
   end
 end
 
+def update_stock(new_stock)
+  Product.transaction do
+    Product.with_advisory_lock(self.id.to_s) do
+      self.update_attributes(stock: new_stock)
+    end
+  end
+end
 private
 # Validates the size of an uploaded image.
   def picture_size

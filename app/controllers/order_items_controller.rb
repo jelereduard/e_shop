@@ -78,7 +78,7 @@ class OrderItemsController < ApplicationController
         else
           @order_item.destroy
         end
-        @product.update_attributes(stock: @product.stock + 1) if @product.present?
+        @product.update_stock(@product.stock + 1) if @product.present?
         respond_to do |format|
           format.html { redirect_to cart_path(@cart), notice: 'Item was successfully removed.' }
           format.json { head :no_content }
@@ -92,13 +92,13 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def increment_quantity
+  def increment_quantity 
     if @cart.present? && @order_item.present?
       begin
         @product = @order_item.product
         if @product.stock > 0
           @order_item.increment!(:quantity)
-          @product.update_attributes(stock: @product.stock - 1)
+          @product.update_stock(@product.stock - 1)
         end
         respond_to do |format|
           format.html { redirect_to cart_path(@cart), notice: 'Item was successfully added.' }
