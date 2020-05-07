@@ -15,6 +15,13 @@
           -group.each do |category|  
             %li
               = link_to "#{category.name}", controller: 'categories', action: 'show', id: "#{category.id}"
+
+        %li.pull-right         
+          .main
+            .form-group.has-feedback.has-search
+              %span.glyphicon.glyphicon-search.form-control-feedback
+              %input#form-filter-products.form-control{:placeholder => "Search", :type => "text"}
+
       %br
       .tab-content
         .tab-pane.fade.in.active
