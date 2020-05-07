@@ -1,25 +1,27 @@
-%p#notice= notice
+#products-index
+  %p#notice= notice
 
-.center
-  %h1 #{@category.name}
+  .center
+    %h1 #{@category.name}
 
-  %ul.nav.nav-tabs
-    %li{class: "#{@category.blank? ? 'active':''}"}
-      = link_to 'Home', products_path
-        
-    - @categories.in_groups_of(3, false).each_with_index do |group, index|
-      -group.each do |category| 
-        %li{class: "#{@category.name == category.first ? 'active':''}"}
-          = link_to "#{category.first}", controller: 'categories', action: 'show', id: "#{category.second}"
-    %li.pull-right     
-      .main
-        .form-group.has-feedback.has-search
-          %span.glyphicon.glyphicon-search.form-control-feedback
-          %input#form-filter-products.form-control{:placeholder => "Search", :type => "text"}
+    %ul.nav.nav-tabs
+      %li{class: "#{@category.blank? ? 'active':''}"}
+        = link_to 'Home', products_path
+          
+      - @categories.in_groups_of(3, false).each_with_index do |group, index|
+        -group.each do |category| 
+          %li{class: "#{@category.name == category.first ? 'active':''}"}
+            = link_to "#{category.first}", controller: 'categories', action: 'show', id: "#{category.second}"
+      %li.pull-right     
+        .main
+          .form-group.has-feedback.has-search
+            %span.glyphicon.glyphicon-search.form-control-feedback
+            %input#form-filter-products.form-control{:placeholder => "Search", :type => "text"}
 
 
-  %br
+    %br
 
-  .tab-content
-    .tab-pane.fade.in.active{:id => "#{@category.name}"}
-      = render 'products/products_category'
+    .tab-content
+      .tab-pane.fade.in.active{:id => "#{@category.name}"}
+        = render 'products/products_category'
+#search-results
