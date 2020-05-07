@@ -6,8 +6,6 @@
   .products
     .center
       %h1 Home
-      -# %p Sign in or create an account. 
-      -# = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
         
       %ul.nav.nav-tabs
         %li.active
@@ -17,7 +15,6 @@
           -group.each do |category|  
             %li
               = link_to "#{category.name}", controller: 'categories', action: 'show', id: "#{category.id}"
-              -# %a{ "data-toggle" => "tab", :href => "categories/"+"#{category.id}"} #{category.name}
       %br
       .tab-content
         .tab-pane.fade.in.active

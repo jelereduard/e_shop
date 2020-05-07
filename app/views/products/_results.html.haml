@@ -1,6 +1,9 @@
 .center
   %h1 The results for "#{params[:qtitle]}"
   %br/
+  = link_to "Go back to all products", products_path, class: "btn btn-primary"
+  %br/
+  %br/
 .grid.container-fluid
   - @search_results_products.in_groups_of(4, false).each_with_index do |group, index|
     .row-fluid

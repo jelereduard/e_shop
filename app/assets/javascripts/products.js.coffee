@@ -1,4 +1,4 @@
-$(document).ready -> 
+$(document).on 'turbolinks:load', ->
   $(".add-to-cart").on "click",(e) ->
     url = $(@).attr("data-url")
     data={}
@@ -19,7 +19,7 @@ $(document).ready ->
             $(product_button).attr("disabled",true).addClass("disabled")
             product_text='a[href="products/'+result.product_id+'"]'
             $(product_text).find("div").find("p.out-of-stock").removeClass("hidden")
-  $('#form-filter-products').on 'keypress', (event) ->
+  $('#form-filter-products').on 'keyup', (event) ->
     if event.keyCode == 13
       query = $(this).val()
       $.ajax(
