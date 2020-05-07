@@ -1,23 +1,29 @@
-%p#notice= notice
-%p
+#products-index
+  %p#notice= notice
+  %p
 
-- @categories=Category.all
-.products
-  .center
-    %h1 Home
-    -# %p Sign in or create an account. 
-    -# = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
-      
-    %ul.nav.nav-tabs
-      %li.active
-        %a{ "data-toggle" => "tab"} Home
-          
-      - @categories.in_groups_of(3, false).each_with_index do |group, index|
-        -group.each do |category|  
-          %li
-            = link_to "#{category.name}", controller: 'categories', action: 'show', id: "#{category.id}"
-            -# %a{ "data-toggle" => "tab", :href => "categories/"+"#{category.id}"} #{category.name}
-    %br
-    .tab-content
-      .tab-pane.fade.in.active
-        = render 'products_category'
+  - @categories=Category.all
+  .products
+    .center
+      %h1 Home
+        
+      %ul.nav.nav-tabs
+        %li.active
+          %a{ "data-toggle" => "tab"} Home
+            
+        - @categories.in_groups_of(3, false).each_with_index do |group, index|
+          -group.each do |category|  
+            %li
+              = link_to "#{category.name}", controller: 'categories', action: 'show', id: "#{category.id}"
+
+        %li.pull-right         
+          .main
+            .form-group.has-feedback.has-search
+              %span.glyphicon.glyphicon-search.form-control-feedback
+              %input#form-filter-products.form-control{:placeholder => "Search", :type => "text"}
+
+      %br
+      .tab-content
+        .tab-pane.fade.in.active
+          = render 'products_category'
+#search-results
