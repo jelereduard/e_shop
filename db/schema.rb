@@ -31,11 +31,9 @@ ActiveRecord::Schema.define(version: 2020_04_29_093438) do
     t.integer "product_id"
     t.integer "quantity", default: 1
     t.integer "cart_id"
-    t.string "order_id"
+    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_order_items_on_cart_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -51,8 +49,8 @@ ActiveRecord::Schema.define(version: 2020_04_29_093438) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "image"
-    t.string "category_id"
-    t.integer "stock"
+    t.integer "category_id"
+    t.integer "stock", default: 0
   end
 
   create_table "users", force: :cascade do |t|
