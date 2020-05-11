@@ -37,8 +37,6 @@ class ProductsController < ApplicationController
         format.js 
         format.html 
       end
-    # render :js => "window.location = '/products?qtitle=#{params[:qtitle]}'"
-    
   end
 
   def show

@@ -12,8 +12,26 @@ class OrdersController < ApplicationController
   def show
   end
 
+  # def subregion_options
+  #   render partial: 'subregion_select'
+  # end
+
+  def get_country_subregions
+    @subregions = [["Please select a state", ""]]
+    if params[:country] != 'Please select a country'
+      carmen_country = Carmen::Country.coded(params[:country])
+      if carmen_country.present?
+        carmen_country.subregions.sort_by{|x| x.name}.map {|r| @subregions << [r.name, r.code]} 
+      end
+    end
+    respond_to do |format|
+      format.js
+    end 
+  end
+
   # GET /orders/new
   def new
+    @user = current_user
     @order = Order.new
   end
 

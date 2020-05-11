@@ -1,3 +1,60 @@
 %h1 New Order
-= render 'form', order: @order
-= link_to 'Back', orders_path
+
+= form_for @order do |f|
+  .form-inputs
+    .container.center.jumbotron
+      %h3 Delivery method
+      %br/
+      = f.label :delivery_method
+      = f.text_field :delivery_method
+
+    .container.center.jumbotron
+      .grid.container-fluid
+        .row-fluid
+          .col-lg-6.col-md-6.col-sm-12.col-xs-12
+            %h3 Billing information
+            = f.label :delivery_name
+            = f.text_field :delivery_name
+            %br/
+            = f.label :delivery_phone
+            = f.text_field :delivery_phone
+
+
+          -# .col-lg-6.col-md-6.col-sm-12.col-xs-12
+            -# .field
+            -#   = f.label :billing_country
+            -#   %br/
+            -#   = f.country_select :billing_country, prompt: 'Please select a country'
+            -# %br/
+            -# .field
+            -#   = f.label :billing_region
+            -#   %br/
+            -#   = render partial: 'subregion_select', locals: {parent_region: f.object.billing_country}
+          .no-padding.col-lg-6.col-sm-6.col-md-6.col-xs-12
+            .col-lg-9.col-md-9.col-sm-9.col-xs-12.col-lg-offset-1.col-md-offset-1.col-sm-offset-1.add-margin-top-10.subregion{class: f.object.billing_country == "US" ? "" : "taxable"}
+              %label.control-label{ for: "select#order_billing_country" }
+                = "State (Required)"
+              = f.select(:billing_region, options_for_select(@subregions || [], f.object.billing_country || ""), {prompt: "Please select a state"}, {class: "form-control subregion"})
+            .col-lg-2.col-md-2.col-sm-2.hidden-xs
+
+
+            = f.label :billing_city
+            = f.text_field :billing_city
+            %br/
+            = f.label :billing_address
+            = f.text_field :billing_address
+
+    .container.center.jumbotron
+      %h3 Payment method
+      = f.label :payment_method
+      = f.text_field :payment_method
+      %br/
+      
+
+  .form-actions
+    = f.button :submit
+
+
+= number_to_currency(@cart.total_price, precision: 2)
+-# %br/
+-# = link_to 'Back', orders_path
