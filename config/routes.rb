@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/orders/subregion_options', to: 'orders#subregion_options'
 
   resources :orders
   resources :carts
@@ -21,7 +22,6 @@ Rails.application.routes.draw do
       get :increment_quantity
     end
   end
-  get '/orders/get_country_subregions', to: 'orders#get_country_subregions'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

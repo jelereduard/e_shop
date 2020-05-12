@@ -12,26 +12,26 @@ class OrdersController < ApplicationController
   def show
   end
 
-  # def subregion_options
-  #   render partial: 'subregion_select'
-  # end
-
-  def get_country_subregions
-    @subregions = [["Please select a state", ""]]
-    if params[:country] != 'Please select a country'
-      carmen_country = Carmen::Country.coded(params[:country])
-      if carmen_country.present?
-        carmen_country.subregions.sort_by{|x| x.name}.map {|r| @subregions << [r.name, r.code]} 
-      end
-    end
-    respond_to do |format|
-      format.js
-    end 
+  def subregion_options
+    render partial: 'subregion_select'
   end
+
+  # def get_country_subregions
+  #   @subregions = [["Please select a state", ""]]
+  #   if params[:country] != 'Please select a country'
+  #     carmen_country = Carmen::Country.coded(params[:country])
+  #     if carmen_country.present?
+  #       carmen_country.subregions.sort_by{|x| x.name}.map {|r| @subregions << [r.name, r.code]} 
+  #     end
+  #   end
+  #   respond_to do |format|
+  #     format.js
+  #   end 
+  # end
 
   # GET /orders/new
   def new
-    @user = current_user
+    @user = User.find_by(id: current_user.id)
     @order = Order.new
   end
 
@@ -87,6 +87,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.fetch(:order, {})
+      params.require(:order).permit(:order_id, :status, :user_id, :delivery_method, :delivery_name, :delivery_phone, :billing_country, :billing_region, :billing_city, :billing_address)
     end
 end
