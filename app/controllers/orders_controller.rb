@@ -26,12 +26,11 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  #     @order_cart_items = @cart.order_items
-
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.order_items = @cart.order_items
 
     respond_to do |format|
       if @order.save

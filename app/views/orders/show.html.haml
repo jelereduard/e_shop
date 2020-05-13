@@ -3,12 +3,8 @@
 
   .container
     %h2 Odrder number: #{@order.id}
-    %h3 status: #{@order.status}
-    .grid.container-fluid
-      .row-fluid
-        .col-lg-4.col-md-6.col-sm-12.col-xs-12
-          .pull-left
-            %h4 User name: #{@order_user.first_name} #{@order_user.last_name}
-            %br/
-            %h4 Delivery name: #{@order.delivery_name}
--# %h4 #{@order_cart_items.first.product.name}
+    %h4 Status: #{@order.status}
+    %h3 Billing information: 
+    %h4 Name: #{@order.delivery_name}
+    %h4 Delivery method: #{@order.delivery_method}
+    %h4 Payment method: #{@order.payment_method}
