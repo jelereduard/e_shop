@@ -8,3 +8,6 @@
     %h4 Name: #{@order.delivery_name}
     %h4 Delivery method: #{@order.delivery_method}
     %h4 Payment method: #{@order.payment_method}
+    - @order.order_items.each do |item|
+      = item.product.name
+      = item.quantity
