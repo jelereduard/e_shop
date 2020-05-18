@@ -2,51 +2,61 @@
   %h1 Payment information
   = form_for @order do |f|
     .form-group
-      .jumbotron
+      .border.container-fluid
         %h4 1. Delivery method
-        .row
+        .row-fluid
           .col-lg-6.col-md-6.col-sm-6.col-xs-6
             %label.radio-inline
-              %input#order_delivery_method_personal_pick_up{:checked => "checked", :name => "order[delivery_method]", :type => "radio", :value => "Personal pick up"}/
+              = f.radio_button :delivery_method, "Personal pick up", :checked => true
               Personal pick up
           .col-lg-6.col-md-6.col-sm-6.col-xs-6
             %label.radio-inline
-              %input#order_delivery_method_delivery_by_courier{:name => "order[delivery_method]", :type => "radio", :value => "Delivery by courier"}/
+              = f.radio_button :delivery_method, "Delivery by courier"
               Delivery by courier
-
-      .jumbotron
+      .border.container-fluid
         %h4 2. Billing information
-        .form-inline
-          %label{:for => "order_delivery_name"} Name
-          %input#order_delivery_name.form-control{:name => "order[delivery_name]", :type => "text", :value => "#{current_user.first_name}" + " " + "#{current_user.last_name}"}/
+        .row-fluid
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :delivery_name, 'Name:'
+              = f.text_field :delivery_name, class:"form-control", value: "#{current_user.first_name} #{current_user.last_name}"
 
-          %label{:for => "order_delivery_phone"} Phone
-          %input#order_delivery_phone.form-control{:name => "order[delivery_phone]", :type => "text"}/
-        = f.label :billing_country
-        = f.country_select :billing_country, prompt: 'Please select a country'
-        .form-inline
-          = f.label :billing_region
-          #order_subregion_select_wrapper
-            = render partial: 'subregion_select', locals: {parent_region: f.object.billing_country}
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :delivery_phone, 'Phone:'
+              = f.text_field :delivery_phone, class: "form-control"
 
-        .form-inline
-          %label{:for => "billing_city"} City
-          %input#order_billing_city.form-control{:name => "order[billing_city]", :type => "text"}/
+        .row-fluid
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            = f.label :billing_country, 'Country:'
+            = f.country_select :billing_country, prompt: 'Please select a country'
+        .row-fluid
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            = f.label :billing_region, 'Region:'
+            #order_subregion_select_wrapper
+              = render partial: 'subregion_select', locals: {parent_region: f.object.billing_country}
 
-          %label{:for => "order_billing_address"} Address
-          %input#order_billing_address.form-control{:name => "order[billing_address]", :type => "text"}/
+        .row-fluid
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :billing_city, 'City:'
+              = f.text_field :billing_city, class: "form-control"
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :billing_address, 'Address:'
+              = f.text_field :billing_address, class: "form-control"
 
-      .jumbotron
+      .border.container-fluid
         %h4 3. Payment method
-        .row
+        .row-fluid
           .col-lg-6.col-md-6.col-sm-6.col-xs-6
             %label.radio-inline
-              %input#order_payment_method_pay_by_card{:checked => "checked", :name => "order[payment_method]", :type => "radio", :value => "Pay by card"}/
+              = f.radio_button :payment_method, "Pay with card", :checked => true
               Pay with card
           .col-lg-6.col-md-6.col-sm-6.col-xs-6
             %label.radio-inline
-              %input#order_delivery_method_pay_on_delivery{:name => "order[payment_method]", :type => "radio", :value => "Pay on delivery"}/
-              Pay on delivery
+              = f.radio_button :payment_method, "Pay with cash"
+              Pay with cash
         
         = f.hidden_field :user_id, { :value => "#{current_user.id}"}
         = f.hidden_field :status, { :value => "pending"}
@@ -55,7 +65,8 @@
         %h3 Total: #{number_to_currency(@cart.total_price, precision: 2)}
         %br/
         .form-actions
-          = f.button :Continue, { class: "btn btn-primary" }
+          = f.button :Continue, { class: "btn btn-primary", onclick: "return $.errorForm()" }
 
 :javascript
   $.initSubregions()
+  

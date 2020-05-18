@@ -1,0 +1,3 @@
+.my_orders
+  - @orders_status.each do |order_status|
+    = render 'orders', order_s: order_status.status

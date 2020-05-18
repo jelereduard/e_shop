@@ -17,6 +17,13 @@ class OrdersController < ApplicationController
     render partial: 'subregion_select'
   end
 
+  def my_orders
+    @orders = Order.all.where(user_id: current_user.id)
+    if @orders.present?
+      @orders_status = Order.select(:status).distinct
+    end
+  end
+
   # GET /orders/new
   def new
     @order = Order.new
@@ -34,7 +41,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to my_orders_path, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
