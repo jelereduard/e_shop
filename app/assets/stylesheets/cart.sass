@@ -4,7 +4,7 @@
 
 .cart-table
   .glyphicon
-    margin-left: 10px
+    // margin-left: 5px
     &:hover
       text-decoration: none
   .glyphicon-trash
@@ -33,3 +33,9 @@
     padding: 0px 10px !important
   tr
     min-width: fit-content
+  td
+    vertical-align: middle !important
+
+  @media screen and (max-width: 767px)
+    td
+      white-space: normal !important

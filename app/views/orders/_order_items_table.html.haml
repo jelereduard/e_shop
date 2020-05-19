@@ -1,0 +1,19 @@
+%table.table.table-striped.table-bordered
+  %thead.thead-dark
+    %tr
+      %th.center Quantity
+      %th.center Product 
+      %th.center Price
+      %th.center Total
+  %tbody.thead-dark
+    - if @order_items[order_id].present?
+      - @order_items[order_id].each do |item|
+        %tr
+          %td.center
+            = item.quantity
+          %td.center
+            = item.product.name
+          %td.center
+            = number_to_currency(item.product.price, precision: 2)
+          %td.center
+            = number_to_currency(item.total_price, precision: 2)

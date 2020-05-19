@@ -1,3 +1,26 @@
 .my_orders
-  - @orders_status.each do |order_status|
-    = render 'orders', order_s: order_status.status
+  - @status.each do |stat|
+    %h3 #{stat}
+    .table-responsive
+      %table.table.table-striped.table-bordered
+        %thead.thead-dark
+          %tr
+            %th.center ID
+            %th.center Date
+            %th.center Total 
+        %tbody
+          - @orders[stat].each do |order|
+            %tr.center.hoverable{:onclick => "window.glg.orders.showOrder(#{order.id})"}
+              %td
+                = order.id
+              %td
+                = order.created_at
+              %td
+                = order.total_price
+            %tr.center.hidden{id: "hidden-row-#{order.id}"}
+              %td{:colspan => 3}
+                #order-items-table
+                = render 'order_items_table', order_id: order.id
+                
+:javascript
+  var target_parent = null;

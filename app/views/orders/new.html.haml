@@ -20,16 +20,18 @@
             .form-group
               = f.label :delivery_name, 'Name:'
               = f.text_field :delivery_name, class:"form-control", value: "#{current_user.first_name} #{current_user.last_name}"
-
+              %span.help-block.hidden Field cannot be empty!
           .col-lg-6.col-md-12.col-sm-12.col-xs-12
             .form-group
               = f.label :delivery_phone, 'Phone:'
               = f.text_field :delivery_phone, class: "form-control"
+              %span.help-block.hidden Field cannot be empty!
 
         .row-fluid
           .col-lg-12.col-md-12.col-sm-12.col-xs-12
-            = f.label :billing_country, 'Country:'
-            = f.country_select :billing_country, prompt: 'Please select a country'
+            .form-group
+              = f.label :billing_country, 'Country:'
+              = f.country_select :billing_country, prompt: 'Please select a country'
         .row-fluid
           .col-lg-12.col-md-12.col-sm-12.col-xs-12
             = f.label :billing_region, 'Region:'
@@ -41,10 +43,12 @@
             .form-group
               = f.label :billing_city, 'City:'
               = f.text_field :billing_city, class: "form-control"
+              %span.help-block.hidden Field cannot be empty!
           .col-lg-6.col-md-12.col-sm-12.col-xs-12
             .form-group
               = f.label :billing_address, 'Address:'
               = f.text_field :billing_address, class: "form-control"
+              %span.help-block.hidden Field cannot be empty!
 
       .border.container-fluid
         %h4 3. Payment method
@@ -65,8 +69,10 @@
         %h3 Total: #{number_to_currency(@cart.total_price, precision: 2)}
         %br/
         .form-actions
-          = f.button :Continue, { class: "btn btn-primary", onclick: "return $.errorForm()" }
+          = f.button :Continue, { class: "btn btn-primary", id:"submit-button"}
 
 :javascript
-  $.initSubregions()
-  
+  var target_parent = null;
+  window.glg.orders.initSubregions();
+  window.glg.orders.clearErrorForm();
+  window.glg.orders.errorForm();

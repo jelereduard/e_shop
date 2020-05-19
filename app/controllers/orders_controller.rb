@@ -10,7 +10,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @order_user = User.find_by(id: @order.user_id)
+    # @order_user = User.find_by(id: @order.user_id)
+    @order_items = OrderItem.where(order_id: @order.id).group_by(&:order_id).to_h
   end
 
   def subregion_options
@@ -18,10 +19,11 @@ class OrdersController < ApplicationController
   end
 
   def my_orders
-    @orders = Order.all.where(user_id: current_user.id)
-    if @orders.present?
-      @orders_status = Order.select(:status).distinct
-    end
+    @orders = Order.where(user_id: current_user.id)
+    order_ids = @orders.pluck(:id)
+    @orders = @orders.order(created_at: :desc).group_by(&:status).to_h
+    @status = @orders.keys if @orders.present?
+    @order_items = OrderItem.where(order_id: order_ids).group_by(&:order_id).to_h
   end
 
   # GET /orders/new
@@ -41,7 +43,9 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to my_orders_path, notice: 'Order was successfully created.' }
+        session[:cart_id] = nil
+        @cart.delete
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
