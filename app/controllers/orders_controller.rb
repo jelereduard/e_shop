@@ -10,6 +10,20 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    # @order_user = User.find_by(id: @order.user_id)
+    @order_items = OrderItem.where(order_id: @order.id).group_by(&:order_id).to_h
+  end
+
+  def subregion_options
+    render partial: 'subregion_select'
+  end
+
+  def my_orders
+    @orders = Order.where(user_id: current_user.id)
+    order_ids = @orders.pluck(:id)
+    @orders = @orders.order(created_at: :desc).group_by(&:status).to_h
+    @status = @orders.keys if @orders.present?
+    @order_items = OrderItem.where(order_id: order_ids).group_by(&:order_id).to_h
   end
 
   # GET /orders/new
@@ -25,9 +39,12 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.order_items = @cart.order_items
 
     respond_to do |format|
       if @order.save
+        session[:cart_id] = nil
+        @cart.delete
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -69,6 +86,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.fetch(:order, {})
+      params.require(:order).permit(:order_id, :status, :user_id, :delivery_method, :payment_method, :delivery_name, :delivery_phone, :billing_country, :billing_region, :billing_city, :billing_address)
     end
 end

@@ -1,4 +1,56 @@
-%p#notice= notice
-= link_to 'Edit', edit_order_path(@order)
-|
-= link_to 'Back', orders_path
+.order-show
+  %p#notice= notice
+  .container-fluid.nopadding
+    .row-fluid
+      .col-lg-12.nopadding
+        .col-lg-5
+          .row-fluid
+            .border
+              .wrapper
+                %h4.bold
+                  Order number: 
+                .normal
+                  #{@order.id}
+              .wrapper
+                %h4.bold
+                  Status: 
+                .normal
+                  #{@order.status}
+              .wrapper
+                %h4.bold
+                  Total: 
+                .normal
+                  #{number_to_currency(@order.total_price)}
+          .row-fluid
+            .border
+              .wrapper
+                %h3 Billing information: 
+              .wrapper
+                %h4.bold
+                  Name: 
+                .normal
+                  #{@order.delivery_name}
+              .wrapper
+                %h4.bold
+                  Delivery method:
+                .normal
+                  #{@order.delivery_method}
+              .wrapper
+                %h4.bold
+                  Payment method:
+                .normal
+                  #{@order.payment_method}
+              .wrapper
+                %h4.bodl Billing address:
+                .normal
+                  #{@order.billing_country}, #{@order.billing_region}, #{@order.billing_city}, #{@order.billing_address}
+        
+        .col-lg-7
+          .row-fluid
+            = render 'order_items_table', order_id: @order.id
+          .row-fluid
+            .col-lg-5
+              = link_to 'Go back to products', products_path, class: "btn btn-primary"
+            .col-lg-5.col-lg-offset-2
+              = link_to 'Go to My Orders', my_orders_path, class: "btn btn-primary"
+

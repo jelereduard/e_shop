@@ -1,3 +1,78 @@
-%h1 New Order
-= render 'form', order: @order
-= link_to 'Back', orders_path
+.order-body
+  %h1 Payment information
+  = form_for @order do |f|
+    .form-group
+      .border.container-fluid
+        %h4 1. Delivery method
+        .row-fluid
+          .col-lg-6.col-md-6.col-sm-6.col-xs-6
+            %label.radio-inline
+              = f.radio_button :delivery_method, "Personal pick up", :checked => true
+              Personal pick up
+          .col-lg-6.col-md-6.col-sm-6.col-xs-6
+            %label.radio-inline
+              = f.radio_button :delivery_method, "Delivery by courier"
+              Delivery by courier
+      .border.container-fluid
+        %h4 2. Billing information
+        .row-fluid
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :delivery_name, 'Name:'
+              = f.text_field :delivery_name, class:"form-control", value: "#{current_user.first_name} #{current_user.last_name}"
+              %span.help-block.hidden Field cannot be empty!
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :delivery_phone, 'Phone:'
+              = f.text_field :delivery_phone, class: "form-control"
+              %span.help-block.hidden Field cannot be empty!
+
+        .row-fluid
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :billing_country, 'Country:'
+              = f.country_select :billing_country, prompt: 'Please select a country'
+        .row-fluid
+          .col-lg-12.col-md-12.col-sm-12.col-xs-12
+            = f.label :billing_region, 'Region:'
+            #order_subregion_select_wrapper
+              = render partial: 'subregion_select', locals: {parent_region: f.object.billing_country}
+
+        .row-fluid
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :billing_city, 'City:'
+              = f.text_field :billing_city, class: "form-control"
+              %span.help-block.hidden Field cannot be empty!
+          .col-lg-6.col-md-12.col-sm-12.col-xs-12
+            .form-group
+              = f.label :billing_address, 'Address:'
+              = f.text_field :billing_address, class: "form-control"
+              %span.help-block.hidden Field cannot be empty!
+
+      .border.container-fluid
+        %h4 3. Payment method
+        .row-fluid
+          .col-lg-6.col-md-6.col-sm-6.col-xs-6
+            %label.radio-inline
+              = f.radio_button :payment_method, "Pay with card", :checked => true
+              Pay with card
+          .col-lg-6.col-md-6.col-sm-6.col-xs-6
+            %label.radio-inline
+              = f.radio_button :payment_method, "Pay with cash"
+              Pay with cash
+        
+        = f.hidden_field :user_id, { :value => "#{current_user.id}"}
+        = f.hidden_field :status, { :value => "pending"}
+
+      .pull-right
+        %h3 Total: #{number_to_currency(@cart.total_price, precision: 2)}
+        %br/
+        .form-actions
+          = f.button :Continue, { class: "btn btn-primary", id:"submit-button"}
+
+:javascript
+  var target_parent = null;
+  window.glg.orders.initSubregions();
+  window.glg.orders.clearErrorForm();
+  window.glg.orders.errorForm();

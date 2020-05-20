@@ -8,13 +8,15 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+
           = link_to "e-shop", root_path, id: "logo"
+       
         .collapse.navbar-collapse#burger-menu
           %ul.nav.navbar-nav.navbar-right
             %li
               = link_to "#{@cart.order_items.sum(&:quantity)}", cart_path(@cart.id), class: "glyphicon glyphicon-shopping-cart", id:"cart_item"
             - if current_user.present?
-              %li= link_to "My orders", "#"
+              %li= link_to "My orders", my_orders_path
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                   Account

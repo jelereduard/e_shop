@@ -40,7 +40,7 @@
 .checkout-buttons
   = link_to 'Go back to products', products_path, class: "btn btn-primary"
   .pull-right
-    = link_to "Checkout", "#", class: "btn btn-primary"
+    = link_to "Continue", new_order_path, class: "btn btn-primary"
   .pull-right
     = button_to 'Empty Cart', @cart, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
 %br/

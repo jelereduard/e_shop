@@ -25,6 +25,9 @@ class Ability
       can :crud, User, user_id: user.id
       cannot [:create, :edit, :destroy], Product
       cannot :curd, OrderItem
+      can [:create, :read], Order do |order|
+        order.user_id == user.id
+      end
     end
     if user.admin?
         # can :read, :all

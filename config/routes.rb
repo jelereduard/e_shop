@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/orders/subregion_options', to: 'orders#subregion_options'
+  get '/my_orders', to:'orders#my_orders'
 
   resources :orders
   resources :carts

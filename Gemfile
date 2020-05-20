@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.6.3'
+
 gem 'rails',                   '5.2.4'
 gem 'bcrypt',                  '3.1.12'
 gem 'faker'
@@ -27,6 +29,7 @@ gem 'devise', '~> 4.4'
 gem "haml"
 gem 'cancancan'
 gem 'pry'
+gem 'carmen-rails', git: 'git@github.com:Studiosity/carmen-rails.git'
 
 group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri
