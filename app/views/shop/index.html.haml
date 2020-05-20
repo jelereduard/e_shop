@@ -1,11 +1,59 @@
-.container.center.index
-  
-  .jumbotron
-    %h1 Welcome!!
-    %br
-    %a.btn.btn-primary{:href => products_path} 
-      %h5 Browse products!
-  %br
-  %h1.pull-left Why choose our products?
-  %br
-  = image_tag 'background_burger.jpg', class: 'bg-img'
+#landing-page.index
+
+  %nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => "products"} Browse all Products
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Categories
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "categories/1"} Burger
+              %li.divider{:role => "separator"}
+              %li
+                %a{:href => "categories/2"} Soup
+              %li.divider{:role => "separator"}
+              %li
+                %a{:href => "categories/3"} Pasta
+        %form.navbar-form.navbar-right
+          .form-group
+            %input.form-control{:placeholder => "Search", :type => "text"}/
+          %button.btn.btn-default{:type => "submit"} Submit
+
+  .container-fluid
+    .center
+      %h1 Welcome!!
+      - if !user_signed_in?
+        %p Sign in or create an account. 
+        = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
+      - else
+        %h2 #{current_user.last_name}
+
+  .container-fluid
+    .pull-right
+      %h1 Why choose our products?
+      %br/
+      %h2 Good!
+      %h2 Fresh!
+      %h2 Tasty!
+      %h2 Trendy!
+
+
+  .container-fluid
+    %section.carousel-fixed-height
+    #carousel-fixed-height.carousel.slide{"data-ride" => "carousel"}
+      %ol.carousel-indicators
+        %li{"data-slide-to" => "0", "data-target" => "#carousel-fixed-height"}
+        %li{"data-slide-to" => "1", "data-target" => "#carousel-fixed-height"}
+        %li.active{"data-slide-to" => "2", "data-target" => "#carousel-fixed-height"}
+      .carousel-inner{:role => "listbox"}
+        .item

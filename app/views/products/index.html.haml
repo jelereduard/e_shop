@@ -1,7 +1,7 @@
 %p#notice= notice
 %p
 
-- @categories=Category.all
+- @categories = Category.all
 .products
   .center
     %h1 Home
@@ -16,7 +16,6 @@
         -group.each do |category|  
           %li
             = link_to "#{category.name}", controller: 'categories', action: 'show', id: "#{category.id}"
-            -# %a{ "data-toggle" => "tab", :href => "categories/"+"#{category.id}"} #{category.name}
     %br
     .tab-content
       .tab-pane.fade.in.active
