@@ -15,7 +15,7 @@ window.glg = window.glg or {}
   orders.errorForm = () ->
     $('#submit-button').addClass('disabled')
     $('#submit-button').attr('disabled','disabled');
-    $('input').on "change", (e) ->
+    $('input').on "input", (e) ->
       orders.clearErrorForm()
       check = true
       arr = $('input')
@@ -26,23 +26,39 @@ window.glg = window.glg or {}
           parent = $(this).parent()
           parent.addClass 'has-error'
           parent.children('span').removeClass('hidden')
+
       if $('#order_billing_country').val() == ""
         $('#order_billing_country').parent().addClass("has-error")
         check = false
-      else
-        $('#order_billing_country').parent().removeClass("has-error")
-          
       if check
         $('#submit-button').removeClass('disabled')
         $('#submit-button').removeAttr('disabled');
+      else
+        $('#submit-button').addClass('disabled')
+        $('#submit-button').attr('disabled','disabled');
+        
+      $('#order_billing_country').on "change", (event) ->
+        if $('#order_billing_country').val() == ""
+          $('#order_billing_country').parent().addClass("has-error")
+          check = false
+        else
+          check = true
+    
+        if check
+          $('#submit-button').removeClass('disabled')
+          $('#submit-button').removeAttr('disabled');
+        else
+          $('#submit-button').addClass('disabled')
+          $('#submit-button').attr('disabled','disabled');
         
         
 
   orders.clearErrorForm = () ->
-    $('input').on "change", (event) ->
+    $('input').on "input", (event) ->
       parent = $(this).parent()
-      parent.removeClass 'has-error'
-      parent.children('span').addClass('hidden')
+      if $(this).val() != ''
+        parent.removeClass 'has-error'
+        parent.children('span').addClass('hidden')
     $('#order_billing_country').on "change", (event) ->
       parent = $(this).parent()
       parent.removeClass 'has-error'

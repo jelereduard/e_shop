@@ -20,13 +20,13 @@
                 (
                 = number_to_currency(item.product.price, precision: 2)
                 )
-            %td.plus-minus.center
+            %td.plus-minus
               = link_to '', increment_quantity_order_item_path(item), { class: "glyphicon glyphicon-plus btn btn-default #{item.product.stock.to_i < 1 ? 'disabled' : ''}", disabled: item.product.stock.to_i<1}
               = link_to '', decrement_quantity_order_item_path(item), { class: "glyphicon glyphicon-minus btn btn-default" }
             %td
               .order-item-details.pull-right
                 = number_to_currency(item.total_price, precision: 2)
-            %td.trash-can.center
+            %td.trash-can
               = link_to '', item, method: :delete, data: { confirm: "Are you sure? " }, class: "glyphicon glyphicon-trash btn btn-default"
       %tfooter
         %tr
