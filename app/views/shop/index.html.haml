@@ -24,36 +24,52 @@
               %li.divider{:role => "separator"}
               %li
                 %a{:href => "categories/3"} Pasta
-        %form.navbar-form.navbar-right
-          .form-group
-            %input.form-control{:placeholder => "Search", :type => "text"}/
-          %button.btn.btn-default{:type => "submit"} Submit
+  #index-background
+    .container-fluid
+      .center
+        %h1 Welcome!!
+        - if !user_signed_in?
+          %p Sign in or create an account. 
+          = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
+        - else
+          %h2 #{current_user.last_name}
 
-  .container-fluid
-    .center
-      %h1 Welcome!!
-      - if !user_signed_in?
-        %p Sign in or create an account. 
-        = link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary button is-warning"
-      - else
-        %h2 #{current_user.last_name}
+    .container-fluid
+      .pull-right
+        %h1 Why choose our products?
+        %br/
+        .text-media
+          %h2 Good!
+          %h2 Fresh!
+          %h2 Tasty!
+          %h2 Trendy!
 
-  .container-fluid
-    .pull-right
-      %h1 Why choose our products?
-      %br/
-      %h2 Good!
-      %h2 Fresh!
-      %h2 Tasty!
-      %h2 Trendy!
-
-
-  .container-fluid
-    %section.carousel-fixed-height
-    #carousel-fixed-height.carousel.slide{"data-ride" => "carousel"}
-      %ol.carousel-indicators
-        %li{"data-slide-to" => "0", "data-target" => "#carousel-fixed-height"}
-        %li{"data-slide-to" => "1", "data-target" => "#carousel-fixed-height"}
-        %li.active{"data-slide-to" => "2", "data-target" => "#carousel-fixed-height"}
-      .carousel-inner{:role => "listbox"}
-        .item
+  %br/
+  %section.carousel-fixed-height
+  #carousel-fixed-height.carousel.slide{"data-ride" => "carousel"}
+    %ol.carousel-indicators
+      %li{"data-slide-to" => "0", "data-target" => "#carousel-fixed-height"}
+      %li{"data-slide-to" => "1", "data-target" => "#carousel-fixed-height"}
+      %li.active{"data-slide-to" => "2", "data-target" => "#carousel-fixed-height"}
+    .carousel-inner{:role => "listbox"}
+      .item
+        #image1.slider-size
+          .carousel-caption.pull-left
+            %h3 Best ingredients
+            %p Fresh & carefully selected
+      .item
+        #image2.slider-size
+          .carousel-caption.pull-left
+            %h3 Trending
+            %p Instagram page coming soon
+      .item.active
+        #image3.slider-size
+          .carousel-caption
+            %h3 Made with love
+            %p We use 0 precooked products
+    %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-fixed-height", :role => "button"}
+      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-fixed-height", :role => "button"}
+      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+      %span.sr-only Next

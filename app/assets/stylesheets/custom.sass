@@ -20,9 +20,10 @@ $sea-serpent:#68C3D4
 
 body
   #landing-page
-    background: url("background-image.jpeg")
-    background-repeat: no-repeat
-    background-size: cover
+    #index-background
+      background: url("background-image.jpeg")
+      background-repeat: no-repeat
+      background-size: cover
   
   padding-top: 55px
   .jumbotron
@@ -133,3 +134,25 @@ footer
 .nopadding
   padding: 0px !important
   // margin: 0px !important
+
+.index
+  .slider-size
+    height: 200px
+  .carousel-caption
+    position: relative
+  #image1
+    background: url('background_pizza.jpeg') center center
+    background-size: cover
+  #image2
+    background: url('background_instagram.png') center center
+    background-size: contain
+    background-repeat: no-repeat
+  #image3
+    background: url('background_burger.jpg') center center
+    background-size: cover
+  .carousel-caption.pull-left
+    color: #000
+  @media screen and (max-width: 767px)
+    .text-media
+      float: right
+  
